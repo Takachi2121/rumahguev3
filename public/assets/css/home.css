@@ -1,0 +1,125 @@
+.home-title{
+    font-size: 3rem;
+    color: #1a1a1a;
+    font-weight: bold;
+    position: relative;
+}
+
+.home-title::after{
+    content: '';
+    position: absolute;
+    background-image: url('../img/brush-title.png');
+    right: 0;
+    bottom: -6px;
+    width: 33%;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.home-subtitle{
+    font-size: 1.2rem;
+    font-weight: 300;
+    max-width: 56%;
+    color: #333333;
+}
+
+.btn-home{
+    background-color: #f1f1f1;
+    color: #FD0C10;
+    border: 1px solid #FD0C10 !important;
+    border-image: linear-gradient(to right, #ffc107, #ff9900);
+    border-radius: 30px;
+    padding: 6px 50px;
+    letter-spacing: .5px;
+    font-weight: 500;
+    font-size: 18px;
+    position: relative;
+    z-index: 5;
+    border: none;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.btn-home:hover{
+    background-color: #FD0C10;
+    color: white;
+    box-shadow: 0px 0px 15px rgba(253, 12, 16, 0.5);
+}
+
+.home-banner {
+    position: relative;
+    overflow: visible;
+    padding-bottom: 130px;
+}
+
+.home-content{
+    background-image: url('../img/LandingPage/Home-back.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 97%;
+    height: 534px;
+    position: relative;
+    border-radius: 12px;
+    z-index: 1;
+    overflow: visible;
+}
+
+.home-content::after{
+    content: '';
+    position: absolute;
+    background-image: url('../img/LandingPage/Home-front.png');
+    left: 50%;
+    bottom: 0;
+    background-size: cover;
+    width: 100%;
+    height: 667px;
+    border-radius: 12px;
+    background-repeat: no-repeat;
+    background-clip: padding-box;
+    z-index: 3;
+    pointer-events: none;
+    animation: slideBounce 1.2s ease-out forwards;
+    opacity: 1;
+}
+
+/* .home-back {
+    width: 90%;
+    max-width: 1100px;
+    border-radius: 20px;
+    background-size: contain;
+    position: relative;
+    z-index: 1;
+}
+
+.home-front {
+    width: 87%;
+    max-width: 1100px;
+    position: absolute;
+    left: 50%;
+    border-radius: 20px;
+    bottom: 13%;
+    z-index: 3;
+    pointer-events: none;
+    animation: slideBounce 1.2s ease-out forwards;
+    opacity: 0;
+} */
+
+@keyframes slideBounce {
+    0% {
+        transform: translate(-50%, 30px); /* muncul dari bawah */
+        opacity: 1;
+    }
+    60% {
+        transform: translate(-50%, -10px); /* mantul ke atas sedikit */
+        opacity: 1;
+    }
+    80% {
+        transform: translate(-50%, 1px); /* turun sedikit */
+    }
+    100% {
+        transform: translate(-50%, 0); /* diam */
+        opacity: 1;
+    }
+}
+
