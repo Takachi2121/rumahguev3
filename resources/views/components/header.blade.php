@@ -1,5 +1,5 @@
 <div class="container mt-4 px-0">
-    <nav class="navbar-glass d-flex justify-content-between align-items-center">
+    <nav class="navbar-glass w-75 d-flex position-fixed justify-content-between align-items-center">
 
         <!-- LEFT LOGO -->
         <div class="navbar-logo">

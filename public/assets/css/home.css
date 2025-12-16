@@ -54,15 +54,26 @@
 }
 
 .home-content{
+    width: 90.4%;
+    object-fit: cover;
+    height: 584px;
+    position: relative;
+    border-radius: 14px;
     background-image: url('../img/LandingPage/Home-back.png');
     background-size: cover;
     background-repeat: no-repeat;
-    width: 97%;
-    height: 534px;
-    position: relative;
-    border-radius: 12px;
     z-index: 1;
     overflow: visible;
+}
+
+.home-content img:nth-child(0){
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    z-index: 1;
 }
 
 .home-content::after{
@@ -73,7 +84,7 @@
     bottom: 0;
     background-size: cover;
     width: 100%;
-    height: 667px;
+    height: 717px;
     border-radius: 12px;
     background-repeat: no-repeat;
     background-clip: padding-box;
@@ -82,28 +93,6 @@
     animation: slideBounce 1.2s ease-out forwards;
     opacity: 1;
 }
-
-/* .home-back {
-    width: 90%;
-    max-width: 1100px;
-    border-radius: 20px;
-    background-size: contain;
-    position: relative;
-    z-index: 1;
-}
-
-.home-front {
-    width: 87%;
-    max-width: 1100px;
-    position: absolute;
-    left: 50%;
-    border-radius: 20px;
-    bottom: 13%;
-    z-index: 3;
-    pointer-events: none;
-    animation: slideBounce 1.2s ease-out forwards;
-    opacity: 0;
-} */
 
 @keyframes slideBounce {
     0% {
@@ -123,3 +112,82 @@
     }
 }
 
+.home-content-row{
+    position:absolute;
+    left:11.5px;
+    bottom:0;
+    width:50%;
+    background:#fff;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    padding:15px 15px 0 0;
+    z-index:4;
+}
+
+/* INVERTED CORNER */
+.home-content-row::before{
+    content:'';
+    position:absolute;
+    top:-40px;
+    left:0;
+    width:40px;
+    height:40px;
+    border-bottom-left-radius:20px;
+    background:transparent;
+
+    /* TRIK UTAMA */
+    box-shadow: 0px 20px 0 .1px rgba(255, 255, 255, 1);
+}
+
+/* INVERTED CORNER – KANAN BAWAH */
+.home-content-row::after{
+    content:'';
+    position:absolute;
+    bottom:0px;
+    right:-40px;
+    width:40px;
+    height:40px;
+    z-index: 2;
+    border-bottom-left-radius:20px;
+    background:transparent;
+    transform: scaleX(-1) rotate(270deg);
+
+    /* TRIK UTAMA */
+    box-shadow: 0px 15px 0 .1px rgba(255, 255, 255, 1);
+
+}
+
+.home-card-row{
+    position: relative;
+    background: linear-gradient(180deg, #F3F4F7 0%, #CDD3DF 100%);
+    border: 2px solid #CCCCCC;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.home-card-title{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.home-content-item{
+    border: 1px solid #CCCCCC;
+    background: linear-gradient(180deg, #F3F4F7 0%, #dedfdf 100%);
+    border-radius: 8px;
+}
+
+.btn-contact{
+    color: #FD0C10;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #FD0C10 !important;
+    border-radius: 20px;
+    padding: 2px 15px;
+    font-weight: 300;
+}
