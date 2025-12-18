@@ -3,14 +3,14 @@
 
         <!-- LEFT LOGO -->
         <div class="navbar-logo">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" class="logoRumahgue">
         </div>
 
         <!-- CENTER MENU -->
         <div>
-            <a href="#" class="text-decoration-none">Beranda</a>
-            <a href="#" class="text-decoration-none">Tentang Kami</a>
-            <a href="#" class="text-decoration-none">Kategori</a>
+            <a href="#" class="text-decoration-none item-nav">Beranda</a>
+            <a href="#" class="text-decoration-none item-nav">Tentang Kami</a>
+            <a href="#" class="text-decoration-none item-nav">Kategori</a>
         </div>
 
         <!-- RIGHT BUTTON -->

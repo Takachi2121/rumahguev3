@@ -245,13 +245,13 @@
 }
 
 .stats-number{
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
     margin: 0;
 }
 
 .stats-desc{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     margin: 0;
     opacity: .9;
@@ -259,7 +259,7 @@
 
 .stats-divider{
     width: 1px;
-    height: 35px;
+    height: 45px;
     background: rgba(255,255,255,.3);
 }
 
