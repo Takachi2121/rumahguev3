@@ -11,14 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nama');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->integer('is_mitra');
             $table->string('password');
+            $table->string('google_id');
             $table->rememberToken();
-            $table->timestamps();
+        });
+
+        Schema::create('perusahaan', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('user')->cascadeOnDelete();
+            $table->string('alamat_perusahaan');
+        });
+
+        Schema::create('tukang', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('user')->cascadeOnDelete();
+            $table->string('keahlian');
+            $table->string('alamat_tukang');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -42,7 +55,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user');
+        Schema::dropIfExists('perusahaan');
+        Schema::dropIfExists('tukang');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
