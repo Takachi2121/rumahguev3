@@ -14,6 +14,6 @@
         </div>
 
         <!-- RIGHT BUTTON -->
-        <button class="btn-signin">Sign In</button>
+        <a href="{{ route('login') }}" class="btn-signin text-white text-decoration-none">Sign In</a>
     </nav>
 </div>

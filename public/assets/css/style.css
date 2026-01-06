@@ -54,6 +54,12 @@
     box-shadow: none;
 }
 
+html, body {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 body{
     background: linear-gradient(to bottom, #FFFFFF 0%, #CDD3DF 100%);
     background-repeat: no-repeat;
