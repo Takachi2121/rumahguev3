@@ -1,15 +1,15 @@
 <form class="user-regis-form form-hidden" data-form="user">
 
-    <input type="text" class="form-control input-login" placeholder="Masukkan Nama Anda...">
-    <input type="email" class="form-control input-login" placeholder="Masukkan Email Anda...">
+    <input type="text" class="form-control input-login" name="namaUser" placeholder="Masukkan Nama Anda...">
+    <input type="email" class="form-control input-login" name="emailUser" placeholder="Masukkan Email Anda...">
 
     <div class="password-input">
-        <input type="password" id="passwordRegis" class="form-control input-login" placeholder="Masukkan Password...">
+        <input type="password" name="passUser" id="passwordRegis" class="form-control input-login" placeholder="Masukkan Password...">
         <i class="fa-regular fa-eye-slash togglePasswordRegis"></i>
     </div>
 
     <div class="password-input">
-        <input type="password" id="passwordRepeat" class="form-control input-login" placeholder="Masukkan Ulang Password...">
+        <input type="password" id="passwordRepeat" name="passUserRepeat" class="form-control input-login" placeholder="Masukkan Ulang Password...">
         <i class="fa-regular fa-eye-slash togglePasswordRepeat"></i>
     </div>
 

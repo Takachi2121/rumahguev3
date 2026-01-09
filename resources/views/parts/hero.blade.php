@@ -4,9 +4,8 @@
     <div class="home-banner pb-5 d-flex flex-column justify-content-center align-items-center text-center">
         <p class="home-title mb-0 mt-5">Bangun Rumah Loe Sekarang!</p>
         <p class="home-subtitle mb-4">Wujudkan rumah impianmu dengan mudah bersama layanan profesional kami dari desain, konstruksi, hingga selesai.</p>
-        <button class="btn-home mb-5">Coba Sekarang</button>
 
-        <div class="row home-content" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200" data-aos-once="true">
+        <div class="row home-content mt-5" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200" data-aos-once="true">
             <div class="row home-content-row" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="300" data-aos-once="true">
                 <div class="col-md-12 d-flex flex-column home-card-row">
                     <div class="home-card-title">
