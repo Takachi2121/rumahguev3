@@ -17,6 +17,9 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    public $timestamps = false;
+
     protected $fillable = [
         'nama',
         'email',
@@ -48,13 +51,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function perusahaan()
+    public function mitra()
     {
-        return $this->hasOne(Perusahaan::class);
-    }
-
-    public function tukang()
-    {
-        return $this->hasOne(Tukang::class);
+        return $this->hasOne(Mitra::class);
     }
 }
