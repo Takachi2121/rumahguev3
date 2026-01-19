@@ -16,7 +16,7 @@
         <!-- RIGHT BUTTON -->
         @auth
             <div class="dropdown">
-                <button class="btn-signin text-white text-decoration-none dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn-signin fw-semibold text-white text-decoration-none dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->nama }}
                 </button>
                 <ul class="dropdown-menu gap-2" aria-labelledby="dropdownMenuButton">

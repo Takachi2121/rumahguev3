@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
-            $table->integer('is_mitra')->default(0);
+            $table->integer('is_mitra')->default(0)->comment('0 = user, 1 = mitra, 2 = admin');
             $table->string('password');
             $table->string('google_id')->nullable();
             $table->rememberToken();

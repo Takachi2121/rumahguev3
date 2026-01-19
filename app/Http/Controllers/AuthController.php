@@ -34,7 +34,7 @@ class AuthController extends Controller
     public function requestOTP(Request $request){
         $request->validate([
             'namaUser' => 'required',
-            'emailUser' => 'required|email',
+            'emailUser' => 'required|email|unique:users,email',
             'passUser' => 'required',
             'passUserRepeat' => 'required|same:passUser',
             'is_mitra' => 'nullable|integer|min:0|max:1',
@@ -46,14 +46,8 @@ class AuthController extends Controller
             'namaUser.required' => 'Nama Tidak Boleh Kosong',
             'emailUser.required' => 'Email Tidak Boleh Kosong',
             'passUser.required' => 'Password Tidak Boleh Kosong',
+            'emailUser.unique' => 'Email Sudah Terdaftar',
         ]);
-
-        if(User::where('email', $request->emailUser)->first()){
-            return response()->json([
-                'success' => false,
-                'message' => 'Email sudah terdaftar'
-            ]);
-        }
 
         $otp = rand(100000, 999999);
 
