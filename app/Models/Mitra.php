@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tukang extends Model
+class Mitra extends Model
 {
     public $timestamps = false;
-    protected $table = 'tukang';
+    protected $table = 'mitra';
 
     protected $fillable = [
         'user_id',
+        'deskripsi',
+        'foto_profil',
+        'whatsapp',
         'keahlian',
-        'alamat_tukang',
+        'alamat_mitra',
+        'portfolio',
+        'portfolio2',
+        'portfolio3',
+        'portfolio4',
+        'portfolio5'
     ];
 
     public function user()

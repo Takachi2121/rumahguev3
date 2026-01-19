@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
@@ -21,17 +21,19 @@ return new class extends Migration
             $table->rememberToken();
         });
 
-        Schema::create('perusahaan', function (Blueprint $table) {
+        Schema::create('mitra', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('user')->cascadeOnDelete();
-            $table->string('alamat_perusahaan');
-        });
-
-        Schema::create('tukang', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('user')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('deskripsi')->nullable();
             $table->string('keahlian');
-            $table->string('alamat_tukang');
+            $table->string('alamat_mitra');
+            $table->string('whatsapp');
+            $table->string('foto_profil')->nullable();
+            $table->string('portfolio')->nullable();
+            $table->string('portfolio2')->nullable();
+            $table->string('portfolio3')->nullable();
+            $table->string('portfolio4')->nullable();
+            $table->string('portfolio5')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
