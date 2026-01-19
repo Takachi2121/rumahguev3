@@ -121,105 +121,38 @@ form{
 .auth-switch {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
     background: linear-gradient(90deg, #F6F8FC 0%, #CDD3DF 100%);
     border-radius: 999px;
-    border: 1px solid FFFFFF;
-    padding: 6px; /* lebih tebal */
-    width: 500px;
-    margin-bottom: 20px;
-    height: 56px; /* switch lebih tinggi */
-    box-sizing: border-box;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 6px;
+    width: 420px;
+    height: 56px;
+    box-shadow: inset 0px 4px 4px rgba(0,0,0,.25);
 }
 
-.auth-switch button,
-.switch-right button {
-    width: max-content;
-    height: 100%;
+.auth-switch button {
     border: none;
-    margin: 0 auto;
     background: transparent;
+    font-size: 16px;
     font-weight: 500;
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
-    font-size: 16px; /* lebih besar */
+    z-index: 2;
     transition: color .3s;
 }
 
-
-/* Right sub switch */
-.switch-right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    height: 100%;
+.auth-switch button.active {
+    color: white;
 }
 
-/* INDICATOR UTAMA (HITAM) */
 .auth-indicator {
     position: absolute;
     top: 4px;
     left: 4px;
+    width: calc(50% - 8px);
     height: calc(100% - 8px);
-    background: #0b0d17; /* hitam */
+    background: #FD0C10;
     border-radius: 999px;
-    z-index: 1;
-    width: var(--x-width, 50%);
-    transform: translateX(var(--x-pos, 0%));
-    transition:
-        transform .45s cubic-bezier(.4,0,.2,1),
-        width .45s cubic-bezier(.4,0,.2,1);
-}
-
-/* SUB INDICATOR (PUTIH) */
-.sub-indicator {
-    position: absolute;
-    top: 4px;
-    left: 0;
-    height: calc(100% - 8px);
-    background: #ffffff; /* putih */
-    border-radius: 999px;
-    z-index: 2;
-    width: var(--sub-width, 50%);
-    transform: translateX(var(--sub-x, 0%));
-    transition:
-        transform .45s cubic-bezier(.4,0,.2,1),
-        width .45s cubic-bezier(.4,0,.2,1);
-}
-
-/* TEKS ACTIVE / INACTIVE */
-.switch-right button.active {
-    color: black; /* teks hitam di atas putih */
-}
-.auth-switch > button.active {
-    color: white; /* teks putih di atas hitam */
-}
-
-/* FONT & CENTER FIX */
-button {
-    text-align: center;
-}
-
-
-.register-switch,
-.mitra-switch {
-    animation: switchFade 0.35s ease;
-}
-
-@keyframes switchFade {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    transition: transform .4s cubic-bezier(.4,0,.2,1);
 }
 
 .form-hidden {
@@ -227,17 +160,11 @@ button {
 }
 
 .form-fade {
-    animation: formFade 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: formFade .35s ease;
 }
 
 @keyframes formFade {
-    from {
-        opacity: 0;
-        transform: translateY(12px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 

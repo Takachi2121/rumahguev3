@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -13,50 +17,147 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function registerUser(Request $request){
+    public function login(Request $request){
+        $email = $request->input('emailUser');
+        $password = $request->input('passwordUser');
+
+        $user = User::where('email', $email)->first();
+
+        if($user && Hash::check($password, $user->password)){
+            Auth::login($user);
+            return redirect()->route('rumahgue');
+        }else{
+            return redirect()->back()->withInput()->withErrors(['email' => 'Email atau password salah']);
+        }
+    }
+
+    public function requestOTP(Request $request){
         $request->validate([
             'namaUser' => 'required',
             'emailUser' => 'required|email',
-            'passwordUser' => 'required|min:6',
-            'passwordUserRepeat' => 'required|same:passwordUser'
+            'passUser' => 'required',
+            'passUserRepeat' => 'required|same:passUser',
+            'is_mitra' => 'nullable|integer|min:0|max:1',
+            'keahlianMitra' => 'nullable|string',
+            'alamatMitra' => 'nullable|string',
+            'teleponMitra' => 'nullable|string',
+        ],[
+            'passUserRepeat.same' => 'Password Tidak Sama',
+            'namaUser.required' => 'Nama Tidak Boleh Kosong',
+            'emailUser.required' => 'Email Tidak Boleh Kosong',
+            'passUser.required' => 'Password Tidak Boleh Kosong',
         ]);
 
-        $otp = rand(10000,99999);
+        if(User::where('email', $request->emailUser)->first()){
+            return response()->json([
+                'success' => false,
+                'message' => 'Email sudah terdaftar'
+            ]);
+        }
 
-        Session::put('register_data', [
-            'nama' => $request->namaUser,
-            'email' => $request->emailUser,
-            'password' => bcrypt($request->passwordUser),
+        $otp = rand(100000, 999999);
+
+        $sessionData = [
+            'nama'       => $request->namaUser,
+            'email'      => $request->emailUser,
+            'telepon'    => $request->telepon,
+            'password'   => $request->passUser,
+            'is_mitra'   => $request->teleponMitra ? 1 : 0,
+            'keahlian'   => $request->keahlianMitra ?? '',
+            'alamat'     => $request->alamatMitra ?? '',
+            'whatsapp'    => $request->teleponMitra ?? '',
+            'otp'        => $otp,
+            'created_at' => now()
+        ];
+
+        // SIMPAN SESSION
+        if ($request->input('teleponMitra')) {
+            Session::put('pending_mitra', $sessionData);
+        } else {
+            Session::put('pending_user', $sessionData);
+        }
+
+        Mail::send('email.verify-email', [
+            'user_name' => $sessionData['nama'],
             'otp' => $otp
-        ]);
-
-        Mail::send('auth.otp', ['otp' => $otp], function($message) use ($request){
-            $message->to($request->emailUser);
-            $message->subject('Kode OTP Gue');
+        ], function($msg) use ($request) {
+            $msg->to($request->emailUser)->subject('Verifikasi Akun Rumahgue');
         });
 
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Mitra Status: ' . ($request->keahlianMitra ? '1' : '0')
+        ]);
     }
 
-    public function verifyOTP(Request $request){
-        $request->validate([
-            'otp' => 'required'
+    public function verifyRegister(Request $request) {
+        $isMitra = Session::has('pending_mitra');
+        $sessionData = $isMitra ? Session::get('pending_mitra') : Session::get('pending_user');
+
+        if (!$sessionData) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Session tidak ditemukan. Silakan daftar ulang!'
+            ]);
+        }
+
+        // cek expired
+        if (now()->diffInMinutes($sessionData['created_at']) > 10) {
+            Session::forget('pending_user');
+            Session::forget('pending_mitra');
+            return response()->json([
+                'success' => false,
+                'message' => 'OTP sudah kadaluarsa. Silakan daftar ulang!'
+            ]);
+        }
+
+        // cek OTP
+        if ($request->otp != $sessionData['otp']) {
+            return response()->json([
+                'success' => false,
+                'message' => 'OTP salah!'
+            ]);
+        }
+
+        // INSERT USER
+        $user = User::create([
+            'nama'      => $sessionData['nama'],
+            'email'     => $sessionData['email'],
+            'is_mitra'  => $sessionData['is_mitra'],
+            'password'  => Hash::make($sessionData['password']),
+            'google_id' => null,
         ]);
 
-        if(!Session::has('register_data')){
-            return response()->json(['success' => false]);
+        // Jika mitra → insert data mitra
+        if ($isMitra) {
+            DB::table('mitra')->insert([
+                'user_id'       => $user->id,
+                'deskripsi'     => null,
+                'keahlian'      => $sessionData['keahlian'],
+                'alamat_mitra'  => $sessionData['alamat'],
+                'whatsapp'      => $sessionData['whatsapp'],
+                'foto_profil'   => null,
+                'portfolio'     => null,
+                'portfolio2'    => null,
+                'portfolio3'    => null,
+                'portfolio4'    => null,
+                'portfolio5'    => null,
+            ]);
         }
 
-        if($request->otp == Session::get('register_data')['otp']){
-            $user = User::create([
-                'name' => Session::get('register_data')['nama'],
-                'email' => Session::get('register_data')['email'],
-                'password' => Session::get('register_data')['password']
-            ]);
-            Session::forget('register_data');
-            return response()->json(['success' => true]);
-        }else{
-            return response()->json(['success' => false]);
-        }
+        // Bersihkan session
+        Session::forget('pending_user');
+        Session::forget('pending_mitra');
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('login')
+        ]);
+    }
+
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('rumahgue');
     }
 }

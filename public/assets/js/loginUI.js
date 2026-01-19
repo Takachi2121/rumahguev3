@@ -1,28 +1,18 @@
-const loginForm   = document.querySelector('.login-form');
-const userForm    = document.querySelector('.user-regis-form');
-const companyForm = document.querySelector('.company-regis-form');
-const workerForm  = document.querySelector('.worker-regis-form');
+const loginForm = document.querySelector('.login-form');
+const userForm  = document.querySelector('.user-regis-form');
+const mitraForm = document.querySelector('.worker-regis-form');
 
-const registerSwitch = document.querySelector('.register-switch');
 const goRegister = document.getElementById('goRegister');
+const registerSwitch = document.querySelector('.register-switch');
 
-const switchBox   = document.getElementById('dynamicSwitch');
-const indicator   = switchBox.querySelector('.auth-indicator');
-const leftBtn     = switchBox.querySelector('[data-action="user"]');
-const switchRight = document.getElementById('switchRight');
+const switchBox = document.getElementById('dynamicSwitch');
+const indicator = switchBox.querySelector('.auth-indicator');
+const buttons   = switchBox.querySelectorAll('button');
 
-let state = 'main';        // main | mitra
-let mitraType = 'company';
-
-// ===== CREATE NESTED INDICATOR =====
-let subIndicator = document.createElement('div');
-subIndicator.classList.add('sub-indicator');
-switchRight.appendChild(subIndicator);
-
-// ===== HELPERS =====
 function hideAllForms() {
-    [loginForm, userForm, companyForm, workerForm]
-        .forEach(f => f.classList.add('form-hidden'));
+    [loginForm, userForm, mitraForm].forEach(f =>
+        f.classList.add('form-hidden')
+    );
 }
 
 function showForm(form) {
@@ -32,135 +22,71 @@ function showForm(form) {
     form.classList.add('form-fade');
 }
 
-function setIndicator(x, w) {
-    indicator.style.setProperty('--x-pos', x);
-    indicator.style.setProperty('--x-width', w);
+function resetForm(form) {
+    if (!form) return;
+    form.reset();
+
+    // optional: reset password type & icon
+    form.querySelectorAll('input[type="text"], input[type="password"]').forEach(input => {
+        if (input.dataset.originalType === 'password') {
+            input.type = 'password';
+        }
+    });
+
+    form.querySelectorAll('.fa-eye-slash').forEach(icon => {
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    });
 }
 
-function setSubIndicator(x, w) {
-    subIndicator.style.setProperty('--sub-x', x);
-    subIndicator.style.setProperty('--sub-width', w);
-}
-
-// ===== REGISTER CLICK =====
+// GO REGISTER
 goRegister.addEventListener('click', e => {
     e.preventDefault();
+
     loginForm.classList.add('d-none');
     registerSwitch.classList.remove('d-none');
 
-    state = 'main';
-    switchRight.innerHTML = `<button data-action="mitra" style="padding-left: 74px">Daftar sebagai Mitra</button>`;
-    switchRight.appendChild(subIndicator);
-
-    leftBtn.classList.add('active');
-    setIndicator('0%', '33%');
-    setSubIndicator('0%', '0%'); // hidden
+    buttons.forEach(b => b.classList.remove('active'));
+    buttons[0].classList.add('active');
+    indicator.style.transform = 'translateX(0%)';
 
     hideAllForms();
+    resetForm(mitraForm);
     showForm(userForm);
 });
 
-// ===== LEFT BUTTON (USER / BACK) =====
-leftBtn.addEventListener('click', () => {
-    // Reset ke awal
-    state = 'main';
-    switchRight.innerHTML = `<button data-action="mitra" style="padding-left: 74px">Daftar sebagai Mitra</button>`;
-    switchRight.appendChild(subIndicator);
-
-    leftBtn.classList.add('active');
-    setIndicator('0%', '33%');
-    setSubIndicator('0%', '0%'); // nested hilang
-
-    hideAllForms();
-    showForm(userForm);
-});
-
-// ===== RIGHT SIDE CLICK =====
-switchRight.addEventListener('click', e => {
-    const btn = e.target.closest('button');
-    if (!btn) return;
-
-    // MASUK MODE MITRA
-    if (btn.dataset.action === 'mitra') {
-        state = 'mitra';
-        mitraType = 'company';
-
-        switchRight.innerHTML = `
-            <button data-mitra="company" class="active">Perusahaan</button>
-            <button data-mitra="worker">Tukang</button>
-        `;
-        switchRight.appendChild(subIndicator);
-
-        leftBtn.classList.remove('active');
-
-        setIndicator('50%', '65.6%'); // hitam meluas ke area Mitra
-        setSubIndicator('5%', '46%'); // nested putih Perusahaan
-
-        hideAllForms();
-        showForm(companyForm);
-
-        // warna teks nested putih
-        switchRight.querySelectorAll('button').forEach(b => b.classList.contains('active') ? b.style.color = 'black' : b.style.color = 'white');
-
-        return;
-    }
-
-    // TOGGLE PERUSAHAAN / TUKANG
-    if (btn.dataset.mitra) {
-        mitraType = btn.dataset.mitra;
-
-        switchRight.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+// SWITCH CLICK
+buttons.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        setSubIndicator(
-            mitraType === 'company' ? '5%' : '116%',
-            mitraType === 'company' ? '46%' : '45%'
-        );
+        indicator.style.transform =
+            index === 0 ? 'translateX(0%)' : 'translateX(104%)';
 
         hideAllForms();
-        mitraType === 'company'
-            ? showForm(companyForm)
-            : showForm(workerForm);
-
-        // nested teks selalu hitam
-        switchRight.querySelectorAll('button').forEach(b => b.classList.contains('active') ? b.style.color = 'black' : b.style.color = 'white');
-    }
-});
-
-const togglePassword = document.getElementById('togglePassword');
-const passwordInput = document.getElementById('password');
-
-togglePassword.addEventListener('click', function () {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-
-    this.classList.toggle('fa-eye-slash');
-    this.classList.toggle('fa-eye');
+        if(index === 0) {
+            resetForm(mitraForm);
+            showForm(userForm);
+        }else{
+            resetForm(userForm);
+            showForm(mitraForm);
+        }
+    });
 });
 
 document.addEventListener("click", function (e) {
+    if (!e.target.classList.contains("toggle-password")) return;
 
-    // PASSWORD UTAMA
-    if (e.target.classList.contains("togglePasswordRegis")) {
-        const wrapper = e.target.closest(".password-input");
-        const input = wrapper.querySelector("input");
+    const wrapper = e.target.closest(".password-input");
+    if (!wrapper) return;
 
-        const isPassword = input.type === "password";
-        input.type = isPassword ? "text" : "password";
+    const input = wrapper.querySelector("input");
+    if (!input) return;
 
-        e.target.classList.toggle("fa-eye");
-        e.target.classList.toggle("fa-eye-slash");
-    }
+    const isPassword = input.type === "password";
+    input.type = isPassword ? "text" : "password";
 
-    // PASSWORD ULANG
-    if (e.target.classList.contains("togglePasswordRepeat")) {
-        const wrapper = e.target.closest(".password-input");
-        const input = wrapper.querySelector("input");
-
-        const isPassword = input.type === "password";
-        input.type = isPassword ? "text" : "password";
-
-        e.target.classList.toggle("fa-eye");
-        e.target.classList.toggle("fa-eye-slash");
-    }
+    e.target.classList.toggle("fa-eye-slash");
+    e.target.classList.toggle("fa-eye");
 });
