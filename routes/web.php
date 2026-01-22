@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('main');
-})->name('rumahgue');
+Route::prefix('/')->group(function (){
+    Route::get('/', [PageController::class, 'beranda'])->name('rumahgue');
+    Route::get('/jasa-kami', [PageController::class, 'jasa'])->name('jasa');
+    Route::get('/jasa-kami/{id}', [PageController::class, 'jasaDetail'])->name('jasa-detail');
+});
 
 Route::prefix('login')->group(function (){
     Route::get('/', [AuthController::class, 'loginPage'])->name('login');

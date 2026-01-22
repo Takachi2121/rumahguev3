@@ -24,9 +24,11 @@ return new class extends Migration
         Schema::create('mitra', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('deskripsi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->string('keahlian');
             $table->string('alamat_mitra');
+            $table->string('lokasi')->nullable();
+            $table->integer('harga')->nullable();
             $table->string('whatsapp');
             $table->string('foto_profil')->nullable();
             $table->string('portfolio')->nullable();

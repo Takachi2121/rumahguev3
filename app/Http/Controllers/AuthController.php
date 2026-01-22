@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         if($user && Hash::check($password, $user->password)){
             Auth::login($user);
-            return redirect()->route('rumahgue');
+            return redirect()->route('jasa');
         }else{
             return redirect()->back()->withInput()->withErrors(['email' => 'Email atau password salah']);
         }

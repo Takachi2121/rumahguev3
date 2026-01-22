@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('assets/css/hero.css') }}">
 
-<div class="container mt-3 px-0">
+<div class="container mt-3 px-0" id="hero-section">
     <div class="home-banner pb-5 d-flex flex-column justify-content-center align-items-center text-center">
         <p class="home-title mb-0 mt-5">Bangun Rumah Loe Sekarang!</p>
         <p class="home-subtitle mb-4">Wujudkan rumah impianmu dengan mudah bersama layanan profesional kami dari desain, konstruksi, hingga selesai.</p>

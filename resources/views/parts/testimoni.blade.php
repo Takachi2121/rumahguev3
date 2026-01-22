@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('assets/css/testimoni.css') }}">
 
-<div class="container testi-section px-0 my-5">
+<div class="container testi-section px-0 my-5" id="testimoni-section">
     <div class="image-testi">
         {{-- Layer 1 --}}
         <img src="{{ asset('assets/img/Person/Testimoni.png') }}" alt="Person 1" class="person-testi" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
