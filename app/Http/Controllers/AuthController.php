@@ -23,9 +23,12 @@ class AuthController extends Controller
 
         $user = User::where('email', $email)->first();
 
-        if($user && Hash::check($password, $user->password)){
+        if($user && Hash::check($password, $user->password) && $user->is_mitra == 0){
             Auth::login($user);
             return redirect()->route('jasa');
+        }elseif($user && Hash::check($password, $user->password) && $user->is_mitra == 1){
+            Auth::login($user);
+            return redirect()->route('mitra-home');
         }else{
             return redirect()->back()->withInput()->withErrors(['email' => 'Email atau password salah']);
         }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MitraController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,12 @@ Route::prefix('/')->group(function (){
     Route::get('/', [PageController::class, 'beranda'])->name('rumahgue');
     Route::get('/jasa-kami', [PageController::class, 'jasa'])->name('jasa');
     Route::get('/jasa-kami/{id}', [PageController::class, 'jasaDetail'])->name('jasa-detail');
+});
+
+Route::prefix('mitra')->group(function(){
+    Route::get('/', [PageController::class, 'mitraHome'])->name('mitra-home');
+    Route::post('/change-password', [MitraController::class, 'changePassword'])->name('mitra-change-password');
+    Route::post('/new-password', [MitraController::class, 'newPassword'])->name('mitra-new-password');
 });
 
 Route::prefix('login')->group(function (){

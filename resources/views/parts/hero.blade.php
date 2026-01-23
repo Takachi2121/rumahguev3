@@ -1,64 +1,68 @@
 <link rel="stylesheet" href="{{ asset('assets/css/hero.css') }}">
 
-<div class="container mt-3 px-0" id="hero-section">
-    <div class="home-banner pb-5 d-flex flex-column justify-content-center align-items-center text-center">
-        <p class="home-title mb-0 mt-5">Bangun Rumah Loe Sekarang!</p>
-        <p class="home-subtitle mb-4">Wujudkan rumah impianmu dengan mudah bersama layanan profesional kami dari desain, konstruksi, hingga selesai.</p>
+<div class="home-banner d-flex flex-column justify-content-center align-items-center text-center">
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline preload="none" class="home-video">
+        <source src="{{ asset('assets/img/Hero.mp4') }}" type="video/mp4">
+        Browser kamu tidak mendukung video tag.
+    </video>
 
-        <div class="row home-content mt-5" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200" data-aos-once="true">
-            <div class="row home-content-row" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="300" data-aos-once="true">
-                <div class="col-md-12 d-flex flex-column home-card-row">
-                    <div class="home-card-title">
-                        <div class="d-flex gap-2 align-items-center">
-                            <img src="{{ asset('assets/img/Vector/Treeview.png') }}" width="15" alt="Icon Treeview">
-                            <p class="fw-light mb-0">Kategori Jasa</p>
-                        </div>
-                        {{-- <div>
-                            <a href="" class="text-decoration-none fw-light text-black">Lihat Semua...</a>
-                        </div> --}}
-                    </div>
-                    <div class="col-md-12 gap-3 justify-content-center d-flex flex-row">
-                        <div class="p-2 px-3 mt-3 home-content-item">
-                            <img src="{{ asset('assets/img/Vector/Architect.png') }}" alt="Design Icon" class="mb-2">
-                            <p class="fw-medium mb-2 fs-5">Jasa Interior</p>
-                            <p class="btn-contact">Lihat Daftar</p>
-                        </div>
-                        <div class="p-2 px-3 mt-3 home-content-item">
-                            <img src="{{ asset('assets/img/Vector/Kontruksi.png') }}" alt="Design Icon" class="mb-2">
-                            <p class="fw-medium mb-2 fs-5">Jasa Kontruksi</p>
-                            <p class="btn-contact">Segera Tiba</p>
-                        </div>
-                        <div class="p-2 px-3 mt-3 home-content-item">
-                            <img src="{{ asset('assets/img/Vector/Tukang.png') }}" alt="Design Icon" class="mb-2">
-                            <p class="fw-medium mb-2 fs-5">Jasa Arsitek</p>
-                            <p class="btn-contact">Segera Tiba</p>
-                        </div>
-                    </div>
+    <!-- Overlay -->
+    <div class="home-overlay"></div>
+
+    <div class="container position-relative">
+        <!-- Badge -->
+        <span class="badge rounded-pill bg-dark px-3 py-2 mb-3 home-badge">
+            <i class="fa-solid fa-globe"></i> Platform Sewa Jasa
+        </span>
+
+        <!-- Title -->
+        <h1 class="home-title mb-3">
+            Solusi Jasa Bangunan Gue
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="home-subtitle mb-5">
+            Bangun, renovasi, dan desain ruang impian Anda dengan tenaga profesional
+            yang terverifikasi, harga transparan, dan proses yang mudah.
+        </p>
+
+        <!-- Search -->
+        <div class="home-search shadow-lg rounded-4 p-3">
+            <div class="row g-2 align-items-center">
+                <p class="fw-normal text-black text-start fs-5 mb-2">Cari Jasa</p>
+                <div class="col-md">
+                    <a href="javascript:void(0)" onclick="upcomingJasa()" class="btn btn-light w-100 text-start home-search-btn">
+                        <i class="fa-solid fa-hammer me-2"></i> Jasa Tukang
+                    </a href="javascript:void(0)">
                 </div>
-            </div>
-            <!-- RIGHT BOTTOM STATS -->
-            <div class="home-stats">
-                <div class="stats-card">
-                    <div class="stats-left">
-                        <div class="stats-avatars">
-                            <img src="{{ asset('assets/img/Person/Girl.png') }}">
-                            <img src="{{ asset('assets/img/Person/Man.png') }}">
-                            <img src="{{ asset('assets/img/Person/Boy.png') }}">
-                        </div>
-                        <div class="stats-text">
-                            <p class="stats-number text-start">1000+ Orang</p>
-                            <p class="stats-desc text-start">Berhasil membangun rumah impian mereka</p>
-                        </div>
-                    </div>
-
-                    <div class="stats-divider"></div>
-
-                    <div class="stats-right">
-                        <p class="stats-number text-start">2.500+ orang</p>
-                        <p class="stats-desc text-start">Memberikan ulasan sangat baik</p>
-                    </div>
+                <div class="col-md">
+                    <a href="{{ route('jasa') }}" class="btn btn-light w-100 text-start home-search-btn">
+                        <i class="fa-solid fa-couch me-2"></i> Jasa Interior
+                    </a href="javascript:void(0)">
                 </div>
+                <div class="col-md">
+                    <a href="javascript:void(0)" onclick="upcomingJasa()" class="btn btn-light w-100 text-start home-search-btn">
+                        <i class="fa-solid fa-compass-drafting me-2"></i> Jasa Arsitek
+                    </a href="javascript:void(0)">
+                </div>
+                {{-- <div class="col-md-auto">
+                    <a href="javascript:void(0)" onclick="upcomingJasa()" class="btn btn-dark px-4">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a href="javascript:void(0)">
+                </div> --}}
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function upcomingJasa() {
+        Swal.fire({
+            icon: 'info',
+            title: 'Jasa Segera Hadir',
+            text: 'Jasa ini sedang dalam pengembangan dan akan segera hadir. Terima kasih atas kesabaran Anda!',
+            confirmButtonText: 'OK'
+        });
+    }
+</script>

@@ -1,5 +1,5 @@
 <div class="container mt-4 px-0">
-    <nav class="navbar-glass w-75 d-flex position-fixed justify-content-between align-items-center">
+    <nav class="navbar-glass w-100 d-flex fixed-top justify-content-evenly align-items-center">
 
         <!-- LEFT LOGO -->
         <div class="navbar-logo">
@@ -9,8 +9,20 @@
         <!-- CENTER MENU -->
         <div class="me-5 pe-3 d-lg-inline d-md-none d-sm-none navbar-menu">
             <a href="{{ route('rumahgue') }}" class="text-decoration-none item-nav">Beranda</a>
-            <a href="{{ route('jasa') }}" class="text-decoration-none item-nav">Jasa Kami</a>
+            <a href="javascript:void(0);" onclick="upcoming()" class="text-decoration-none item-nav">Simulasi Rumah</a>
+            <a href="javascript:void(0);" onclick="upcoming()" class="text-decoration-none item-nav">Berita</a>
         </div>
+
+        <script>
+            function upcoming() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Fitur Segera Hadir',
+                    text: 'Fitur ini sedang dalam pengembangan dan akan segera hadir. Terima kasih atas kesabaran Anda!',
+                    confirmButtonText: 'OK'
+                });
+            }
+        </script>
 
         <!-- RIGHT BUTTON -->
         @auth

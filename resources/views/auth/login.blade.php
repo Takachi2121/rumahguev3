@@ -12,6 +12,26 @@
 </head>
 
 <body style="background: linear-gradient(150deg, #FFFFFF 0%, #CDD3DF 100%);">
+    @if (session('error'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+                Toast.fire({
+                icon: "error",
+                title: "{{ session('error') }}"
+            });
+        </script>
+    @endif
+
     @error('email')
         <script>
             const Toast = Swal.mixin({
