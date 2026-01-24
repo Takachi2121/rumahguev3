@@ -19,6 +19,9 @@ Route::prefix('mitra')->group(function(){
     Route::post('/new-password', [MitraController::class, 'newPassword'])->name('mitra-new-password');
     Route::put('/update-profile', [MitraController::class, 'updateMitra'])->name('mitra-update-profile');
     Route::get('/portofolio', [PageController::class, 'mitraPortfolio'])->name('mitra-portfolio');
+    Route::post('/add-portofolio', [MitraController::class, 'add'])->name('mitra-add-portfolio');
+    Route::put('/edit-portofolio', [MitraController::class, 'edit'])->name('mitra-edit-portfolio');
+    Route::delete('/delete-portofolio', [MitraController::class, 'delete'])->name('mitra-delete-portfolio');
 });
 
 Route::prefix('login')->group(function (){

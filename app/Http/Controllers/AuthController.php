@@ -26,7 +26,7 @@ class AuthController extends Controller
         if($user && Hash::check($password, $user->password) && $user->is_mitra == 0){
             Auth::login($user);
             return redirect()->route('jasa');
-        }elseif($user && Hash::check($password, $user->password) && $user->is_mitra == 1){
+        }elseif($user && Hash::check($password, $user->password) && $user->is_mitra == 1 || $user->is_mitra == 2){
             Auth::login($user);
             return redirect()->route('mitra-home');
         }else{

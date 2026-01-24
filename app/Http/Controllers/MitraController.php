@@ -8,6 +8,7 @@ use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class MitraController extends Controller
@@ -141,4 +142,90 @@ class MitraController extends Controller
             "redirect" => route('mitra-home')
         ]);
     }
+
+       public function add(Request $request)
+    {
+        $request->validate([
+            'portfolio' => 'required|image|max:2048'
+        ]);
+
+        $mitra = Mitra::with('user:id,nama')->where('user_id', Auth::id())->firstOrFail();
+
+        // Cari slot portofolio kosong
+        for($i=1; $i<=5; $i++){
+            $slot = $i === 1 ? 'portfolio' : 'portfolio'.$i;
+            if(empty($mitra->$slot)){
+                $file = $request->file('portfolio');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $path = public_path('assets/img/Portfolio/'.$mitra->user->nama);
+
+                if(!file_exists($path)) mkdir($path, 0777, true);
+
+                $file->move($path, $filename);
+
+                $mitra->$slot = $filename;
+                $mitra->save();
+
+                return response()->json(['success'=>true, 'slot'=>$slot, 'filename'=>$filename]);
+            }
+        }
+
+        return response()->json(['success'=>false, 'message'=>'Semua slot portofolio sudah penuh.']);
+    }
+
+    public function edit(Request $request)
+    {
+        $request->validate([
+            'slot' => 'required|string|in:portfolio,portfolio2,portfolio3,portfolio4,portfolio5',
+            'portfolio' => 'nullable|image|max:2048'
+        ]);
+
+        $mitra = Mitra::with('user:id,nama')->where('user_id', Auth::id())->firstOrFail();
+
+        $slot = $request->slot;
+
+        if($request->hasFile('portfolio')){
+            // Hapus file lama
+            $oldFile = public_path('assets/img/Portfolio/'.$mitra->user->nama.'/'.$mitra->$slot);
+            if(!empty($mitra->$slot) && file_exists($oldFile)){
+                unlink($oldFile);
+            }
+
+            $file = $request->file('portfolio');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $path = public_path('assets/img/Portfolio/'.$mitra->user->nama);
+            if(!file_exists($path)) mkdir($path, 0777, true);
+            $file->move($path, $filename);
+
+            $mitra->$slot = $filename;
+            $mitra->save();
+
+            return response()->json(['success'=>true, 'filename'=>$filename]);
+        }
+
+        return response()->json(['success'=>true, 'message'=>'Tidak ada perubahan file']);
+    }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'slot' => 'required|string|in:portfolio,portfolio2,portfolio3,portfolio4,portfolio5',
+        ]);
+
+        $mitra = Mitra::with('user:id,nama')->where('user_id', Auth::id())->firstOrFail();
+        $slot = $request->slot;
+
+        if(!empty($mitra->$slot)){
+            $filePath = public_path('assets/img/Portfolio/'.$mitra->user->nama.'/'.$mitra->$slot);
+            if(file_exists($filePath)) unlink($filePath);
+
+            $mitra->$slot = null;
+            $mitra->save();
+
+            return response()->json(['success'=>true]);
+        }
+
+        return response()->json(['success'=>false, 'message'=>'Portofolio tidak ditemukan']);
+    }
+
 }

@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('mitra.main')
 
 @section('title', 'Pengaturan')
 @section('subtitle', 'Kelola pengaturan akun mitra Anda di sini.')

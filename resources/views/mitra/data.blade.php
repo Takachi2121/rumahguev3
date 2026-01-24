@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('mitra.main')
 
 @section('title', 'Data Diri')
 @section('subtitle', 'Kelola data diri mitra Anda di sini.')

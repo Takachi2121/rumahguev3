@@ -76,13 +76,13 @@ class PageController extends Controller
 
     public function mitraHome()
     {
-        if(!Auth::check()){
+        if(!Auth::check() || Auth::user()->is_mitra != 1){
             return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
         }
 
         $mitra = Mitra::where('user_id', Auth::id())->firstOrFail();
 
-        return view('admin.data', compact('mitra'));
+        return view('mitra.data', compact('mitra'));
     }
 
     public function mitraSettings()
@@ -91,12 +91,12 @@ class PageController extends Controller
             return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
         }
 
-        return view('admin.pengaturan');
+        return view('mitra.pengaturan');
     }
 
     public function mitraPortfolio()
     {
-        if (!Auth::check()) {
+        if (!Auth::check() || Auth::user()->is_mitra != 1) {
             return redirect()->route('login')
                 ->with('error', 'Silahkan login terlebih dahulu');
         }
@@ -104,7 +104,17 @@ class PageController extends Controller
 
         // dd($mitra);
 
-        return view('admin.porto', compact('mitra'));
+        return view('mitra.porto', compact('mitra'));
+    }
+
+    public function adminUser()
+    {
+        if (!Auth::check() || Auth::user()->is_mitra != 2) {
+            return redirect()->route('login')
+                ->with('error', 'Silahkan login terlebih dahulu');
+        }
+
+        return view('mitra.porto-add');
     }
 
 }
