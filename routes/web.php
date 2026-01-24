@@ -14,8 +14,11 @@ Route::prefix('/')->group(function (){
 
 Route::prefix('mitra')->group(function(){
     Route::get('/', [PageController::class, 'mitraHome'])->name('mitra-home');
+    Route::get('/pengaturan', [PageController::class, 'mitraSettings'])->name('mitra-settings');
     Route::post('/change-password', [MitraController::class, 'changePassword'])->name('mitra-change-password');
     Route::post('/new-password', [MitraController::class, 'newPassword'])->name('mitra-new-password');
+    Route::put('/update-profile', [MitraController::class, 'updateMitra'])->name('mitra-update-profile');
+    Route::get('/portofolio', [PageController::class, 'mitraPortfolio'])->name('mitra-portfolio');
 });
 
 Route::prefix('login')->group(function (){

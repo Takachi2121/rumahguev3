@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('lokasi')->nullable();
             $table->integer('harga')->nullable();
             $table->string('whatsapp');
-            $table->string('foto_profil')->nullable();
+            $table->string('foto_profil')->default('default.jpg');
             $table->string('portfolio')->nullable();
             $table->string('portfolio2')->nullable();
             $table->string('portfolio3')->nullable();

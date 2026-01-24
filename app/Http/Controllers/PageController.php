@@ -82,6 +82,29 @@ class PageController extends Controller
 
         $mitra = Mitra::where('user_id', Auth::id())->firstOrFail();
 
-        return view('admin.pengaturan', compact('mitra'));
+        return view('admin.data', compact('mitra'));
     }
+
+    public function mitraSettings()
+    {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
+        }
+
+        return view('admin.pengaturan');
+    }
+
+    public function mitraPortfolio()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')
+                ->with('error', 'Silahkan login terlebih dahulu');
+        }
+        $mitra = Mitra::with('user:id,nama')->where('user_id', Auth::id())->firstOrFail();
+
+        // dd($mitra);
+
+        return view('admin.porto', compact('mitra'));
+    }
+
 }

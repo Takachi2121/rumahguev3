@@ -8,12 +8,12 @@
     <nav class="nav flex-column gap-2 flex-grow-1">
         <p class="text-uppercase text-black-50 small fw-bold mt-3 mb-1">Menu Utama</p>
 
-        <a class="nav-link" href="#"><i class="fa-solid fa-pencil me-2"></i> Data Diri</a>
-        <a class="nav-link" href="#"><i class="fa-solid fa-briefcase me-2"></i> Portofolio</a>
+        <a class="nav-link" href="{{ route('mitra-home') }}"><i class="fa-solid fa-pencil me-2"></i> Data Diri</a>
+        <a class="nav-link" href="{{ route('mitra-portfolio') }}"><i class="fa-solid fa-briefcase me-2"></i> Portofolio</a>
 
         <p class="text-uppercase text-black-50 small fw-bold mt-3 mb-1">Pengaturan</p>
 
-        <a class="nav-link" href="#"><i class="fa-solid fa-gear me-2"></i> Ubah Password</a>
+        <a class="nav-link" href="{{ route('mitra-settings') }}"><i class="fa-solid fa-gear me-2"></i> Ubah Password</a>
     </nav>
 
     <!-- Logout -->

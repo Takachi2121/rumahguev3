@@ -17,6 +17,7 @@ class Mitra extends Model
         'foto_profil',
         'whatsapp',
         'harga',
+        'lokasi',
         'keahlian',
         'alamat_mitra',
         'portfolio',
@@ -28,6 +29,6 @@ class Mitra extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

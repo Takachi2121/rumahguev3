@@ -133,7 +133,6 @@ class AuthController extends Controller
                 'keahlian'      => $sessionData['keahlian'],
                 'alamat_mitra'  => $sessionData['alamat'],
                 'whatsapp'      => $sessionData['whatsapp'],
-                'foto_profil'   => null,
                 'portfolio'     => null,
                 'portfolio2'    => null,
                 'portfolio3'    => null,

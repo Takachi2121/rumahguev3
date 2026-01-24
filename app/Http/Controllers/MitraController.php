@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mitra;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -82,6 +83,62 @@ class MitraController extends Controller
         return response()->json([
             'success' => true,
             'redirect' => route('login')
+        ]);
+    }
+
+    public function updateMitra(Request $request){
+        $user = Auth::user();
+        $mitra = $user->mitra;
+        $request->validate([
+            'namaMitra' => 'required|string|max:255',
+            'lokasiMitra' => 'required|string|max:255',
+            'waMitra' => 'required|string|max:15',
+            'emailMitra' => 'required|email|unique:users,email,' . $user->id,
+            'keahlianMitra' => 'required|string|in:Interior,Arsitek,Konstruksi,Tukang',
+            'hargaMitra' => 'required|numeric|min:0',
+            'alamatMitra' => 'required|string|max:255',
+            'deskripsiMitra' => 'nullable|string'
+        ],[
+            'hargaMitra.numeric' => 'Harga Mitra harus berupa angka',
+            'namaMitra.required' => 'Nama Mitra Tidak Boleh Kosong',
+            'lokasiMitra.required' => 'Lokasi Mitra Tidak Boleh Kosong',
+            'waMitra.required' => 'Nomor Whatsapp Mitra Tidak Boleh Kosong',
+            'hargaMitra.required' => 'Harga Mitra Tidak Boleh Kosong',
+            'alamatMitra.required' => 'Alamat Mitra Tidak Boleh Kosong',
+        ]);
+
+        if ($request->hasFile('foto_profil')) {
+            $file = $request->file('foto_profil');
+
+            if ($mitra->foto_profil && file_exists(public_path('assets/img/Profile/' . $mitra->foto_profil) && $mitra->foto_profil != 'default.jpg')) {
+                unlink(public_path('assets/img/Profile/' . $mitra->foto_profil));
+            }
+
+            $filename = $user->nama . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/img/Profile'), $filename);
+        }else{
+            $filename = $mitra->foto_profil;
+        }
+
+        User::where('id', $user->id)->update([
+            'nama' => $request->namaMitra,
+            'email' => $request->emailMitra
+        ]);
+
+        Mitra::where('user_id', $user->id)->update([
+            'foto_profil' => $filename,
+            'lokasi' => $request->lokasiMitra,
+            'whatsapp' => $request->waMitra,
+            'keahlian' => $request->keahlianMitra,
+            'harga' => str_replace('.', '',$request->hargaMitra),
+            'alamat_mitra' => $request->alamatMitra,
+            'deskripsi' => $request->deskripsiMitra
+        ]);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Data berhasil diubah",
+            "redirect" => route('mitra-home')
         ]);
     }
 }

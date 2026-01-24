@@ -13,6 +13,7 @@
 
 <body style="background: linear-gradient(150deg, #FFFFFF 0%, #CDD3DF 100%);">
     @if (session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             const Toast = Swal.mixin({
                 toast: true,
@@ -25,7 +26,7 @@
                     toast.onmouseleave = Swal.resumeTimer;
                 }
             });
-                Toast.fire({
+            Toast.fire({
                 icon: "error",
                 title: "{{ session('error') }}"
             });
@@ -33,6 +34,7 @@
     @endif
 
     @error('email')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             const Toast = Swal.mixin({
                 toast: true,
