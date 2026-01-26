@@ -31,6 +31,8 @@ Route::prefix('mitra')->group(function(){
 Route::prefix('admin')->group(function(){
     Route::get('/', [PageController::class, 'adminUser'])->name('admin-user');
     Route::put('/edit-user/{id}', [AdminController::class, 'editUser'])->name('admin-edit-user');
+    Route::delete('/hapus-user/{id}', [AdminController::class, 'hapusUser'])->name('admin-hapus-user');
+    Route::post('/tambah-user', [AdminController::class, 'tambahUser'])->name('admin-tambah-user');
 });
 
 Route::prefix('login')->group(function (){

@@ -13,7 +13,11 @@
                 <p class="fw-semibold fs-4">List Data User</p>
             </div>
             <div class="col-md-6 text-end align-self-center">
-                <button class="btn btn-primary mb-3"><i class="fa-solid fa-plus"></i> Tambah Data</button>
+                <button class="btn btn-primary mb-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addUserModal">
+                    <i class="fa-solid fa-plus"></i> Tambah User
+                </button>
             </div>
         </div>
         <table id="usersTable" class="table table-bordered table-striped nowrap" style="width:100%">
@@ -46,19 +50,54 @@
                                 data-id="{{ $user->id }}"
                                 data-nama="{{ $user->nama }}"
                                 data-email="{{ $user->email }}"
-                                data-role="{{ $user->is_mitra }}"
                             >
                                 <i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Edit</button>
-                            <form action="#" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus user ini?')">
+                            <form class="d-inline form-delete-user" data-id="{{ $user->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Hapus</button>
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa-solid fa-trash"></i>&nbsp;Hapus
+                                </button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form id="addUserForm">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Data User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" name="namaUser" id="namaUserTambah" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email User</label>
+                        <input type="email" name="emailUser" id="emailUserTambah" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <small class="text-danger">Catatan: Password otomatis terisi "password"</small>
+                    <button type="submit" id="btnTambahUser" class="btn btn-danger w-100">
+                        <span class="btn-text"><i class="fa-regular fa-floppy-disk"></i> Simpan Data</span>
+                        <span class="btn-loading d-none"><span class="spinner-border spinner-border-sm"></span> Loading...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -86,15 +125,6 @@
                     <div class="mb-3">
                         <label class="form-label">Email User</label>
                         <input type="email" name="emailUser" id="emailUser" class="form-control">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Role User</label>
-                        <select name="roleUser" id="roleUser" class="form-control">
-                            <option value="2">Admin</option>
-                            <option value="1">Mitra</option>
-                            <option value="0">User</option>
-                        </select>
                     </div>
                 </div>
 

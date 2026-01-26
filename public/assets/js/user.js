@@ -43,9 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('namaUser').value = this.dataset.nama;
             document.getElementById('emailUser').value = this.dataset.email;
 
-            // AUTO SELECT ROLE
-            document.getElementById('roleUser').value = this.dataset.role;
-
             modal.show();
         });
     });
@@ -61,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
         axios.put(`/admin/edit-user/${document.getElementById('id').value}`, {
             namaUser: document.getElementById('namaUser').value,
             emailUser: document.getElementById('emailUser').value,
-            roleUser: document.getElementById('roleUser').value,
         })
         .then(response => {
             Swal.fire({
@@ -87,6 +83,94 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.querySelector('.btn-text').classList.remove('d-none');
             btn.querySelector('.btn-loading').classList.add('d-none');
             btn.disabled = false;
+        });
+    });
+
+    // Form Tambah
+    const formTambah = document.getElementById('addUserForm');
+    const btnTambah = document.getElementById('btnTambahUser');
+    const btnText = btnTambah.querySelector('.btn-text');
+    const btnLoading = btnTambah.querySelector('.btn-loading');
+
+    formTambah.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        btnTambah.disabled = true;
+        btnText.classList.add('d-none');
+        btnLoading.classList.remove('d-none');
+
+        const formData = new FormData(formTambah);
+
+        axios.post('/admin/tambah-user', formData)
+            .then(res => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: res.data.message ?? 'User berhasil ditambahkan',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => location.reload());
+            })
+            .catch(err => {
+                let msg = 'Terjadi kesalahan';
+                if (err.response?.status === 422) {
+                    msg = Object.values(err.response.data.errors)[0][0];
+                }
+                Swal.fire({ icon: 'error', title: 'Gagal', text: msg });
+            })
+            .finally(() => {
+                btnTambah.disabled = false;
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+            });
+    });
+});
+
+document.querySelectorAll('.form-delete-user').forEach(form => {
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const userId = this.dataset.id;
+
+        Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            text: 'Data user akan dihapus permanen!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.delete(`/admin/hapus-user/${userId}`, {
+                    headers: {
+                        'X-CSRF-TOKEN': document
+                            .querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    }
+                })
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: res.data.message,
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        location.reload(); // atau hapus row tabel
+                    });
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Data gagal dihapus'
+                    });
+                    console.log(err);
+                });
+            }
         });
     });
 });
