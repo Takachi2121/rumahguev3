@@ -33,6 +33,10 @@ Route::prefix('admin')->group(function(){
     Route::put('/edit-user/{id}', [AdminController::class, 'editUser'])->name('admin-edit-user');
     Route::delete('/hapus-user/{id}', [AdminController::class, 'hapusUser'])->name('admin-hapus-user');
     Route::post('/tambah-user', [AdminController::class, 'tambahUser'])->name('admin-tambah-user');
+    Route::get('/admin-mitra', [PageController::class, 'adminMitra'])->name('admin-mitra');
+    Route::post('/tambah-mitra', [AdminController::class, 'tambahMitra'])->name('admin-tambah-mitra');
+    Route::put('/edit-mitra/{id}', [AdminController::class, 'editMitra'])->name('admin-edit-mitra');
+    Route::delete('/hapus-mitra/{id}', [AdminController::class, 'hapusMitra'])->name('admin-hapus-mitra');
 });
 
 Route::prefix('login')->group(function (){

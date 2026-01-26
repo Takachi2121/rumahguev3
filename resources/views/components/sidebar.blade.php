@@ -15,7 +15,7 @@
             <a class="nav-link" href="{{ route('mitra-portfolio') }}"><i class="fa-solid fa-briefcase me-2"></i> Portofolio</a>
         @elseif(Auth::user()->is_mitra === 2)
             <a class="nav-link" href="{{ route('admin-user') }}"><i class="fa-solid fa-pencil me-2"></i> Data User</a>
-            <a class="nav-link" href="#"><i class="fa-solid fa-briefcase me-2"></i> Data Mitra</a>
+            <a class="nav-link" href="{{ route('admin-mitra') }}"><i class="fa-solid fa-briefcase me-2"></i> Data Mitra</a>
         @endif
 
         <p class="text-uppercase text-black-50 small fw-bold mt-3 mb-1">Pengaturan</p>

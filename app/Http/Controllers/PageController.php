@@ -196,4 +196,13 @@ class PageController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function adminMitra(){
+        $mitras = Mitra::with('user:id,nama,email,is_mitra')
+            ->whereHas('user', function($query) {
+                $query->where('is_mitra', 1);
+            })
+            ->get();
+        return view('admin.mitra', compact('mitras'));
+    }
+
 }

@@ -66,4 +66,103 @@ class AdminController extends Controller
             'message' => 'Data Berhasil Ditambahkan'
         ]);
     }
+    public function editMitra($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'namaMitra'     => 'required',
+            'emailMitra'    => 'required|email|unique:users,email,' . $user->id,
+            'keahlianMitra' => 'required',
+            'deskripsiMitra'=> 'nullable',
+            'alamatMitra'   => 'required',
+            'lokasiMitra'   => 'required',
+            'whatsappMitra' => 'required',
+            'hargaMitra'    => 'required|numeric',
+        ],[
+            'namaMitra.required' => 'Nama Tidak Boleh Kosong',
+            'lokasiMitra.required' => 'Nama Tidak Boleh Kosong',
+            'emailMitra.required' => 'Email Tidak Boleh Kosong',
+            'emailMitra.unique' => 'Email Sudah Terdaftar',
+            'keahlianMitra.required' => 'Keahlian Tidak Boleh Kosong',
+            'alamatMitra.required' => 'Alamat Tidak Boleh Kosong',
+            'whatsappMitra.required' => 'Nomor Whatsapp Tidak Boleh Kosong',
+            'hargaMitra.required' => 'Harga Tidak Boleh Kosong',
+            'hargaMitra.numeric' => 'Harga harus berupa angka',
+        ]);
+
+        // Update user
+        $user->update([
+            'nama' => $request->namaMitra,
+            'email' => $request->emailMitra,
+            'is_mitra' => 1
+        ]);
+
+        // Update mitra
+        $user->mitra->update([
+            'deskripsi' => $request->deskripsiMitra,
+            'keahlian' => $request->keahlianMitra,
+            'alamat_mitra' => $request->alamatMitra,
+            'whatsapp' => $request->whatsappMitra,
+            'harga' => $request->hargaMitra,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Diubah'
+        ]);
+    }
+
+    public function tambahMitra(Request $request)
+    {
+        $request->validate([
+            'namaMitra' => 'required',
+            'emailMitra' => 'required|email|unique:users,email',
+            'keahlianMitra' => 'required',
+            'alamatMitra' => 'required',
+            'whatsappMitra' => 'required',
+            'hargaMitra' => 'required|numeric',
+            'deskripsiMitra' => 'nullable'
+        ],[
+            'namaMitra.required' => 'Nama Tidak Boleh Kosong',
+            'emailMitra.required' => 'Email Tidak Boleh Kosong',
+            'emailMitra.unique' => 'Email Sudah Terdaftar',
+            'keahlianMitra.required' => 'Keahlian Tidak Boleh Kosong',
+            'alamatMitra.required' => 'Alamat Tidak Boleh Kosong',
+            'whatsappMitra.required' => 'Nomor Whatsapp Tidak Boleh Kosong',
+            'hargaMitra.required' => 'Harga Tidak Boleh Kosong',
+            'hargaMitra.numeric' => 'Harga harus berupa angka',
+        ]);
+
+        $user = User::create([
+            'nama' => $request->namaMitra,
+            'email' => $request->emailMitra,
+            'password' => Hash::make('password'),
+            'is_mitra' => 1
+        ]);
+
+        $user->mitra()->create([
+            'deskripsi' => $request->deskripsiMitra,
+            'keahlian' => $request->keahlianMitra,
+            'alamat_mitra' => $request->alamatMitra,
+            'whatsapp' => $request->whatsappMitra,
+            'harga' => $request->hargaMitra
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Ditambahkan'
+        ]);
+    }
+
+    public function hapusMitra($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Dihapus'
+        ]);
+    }
 }

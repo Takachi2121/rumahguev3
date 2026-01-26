@@ -145,3 +145,7 @@
     </div>
 </div>
 @endsection
+
+@section('js-admin')
+<script src="{{ asset('assets/js/user.js') }}"></script>
+@endsection
