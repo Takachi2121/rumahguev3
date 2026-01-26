@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\PageController;
@@ -11,10 +12,10 @@ Route::prefix('/')->group(function (){
     Route::get('/jasa-kami', [PageController::class, 'jasa'])->name('jasa');
     Route::get('/jasa-kami/{id}', [PageController::class, 'jasaDetail'])->name('jasa-detail');
 });
+Route::get('/pengaturan', [PageController::class, 'mitraSettings'])->name('mitra-settings');
 
 Route::prefix('mitra')->group(function(){
     Route::get('/', [PageController::class, 'mitraHome'])->name('mitra-home');
-    Route::get('/pengaturan', [PageController::class, 'mitraSettings'])->name('mitra-settings');
     Route::post('/change-password', [MitraController::class, 'changePassword'])->name('mitra-change-password');
     Route::post('/new-password', [MitraController::class, 'newPassword'])->name('mitra-new-password');
     Route::put('/update-profile', [MitraController::class, 'updateMitra'])->name('mitra-update-profile');
@@ -22,6 +23,11 @@ Route::prefix('mitra')->group(function(){
     Route::post('/add-portofolio', [MitraController::class, 'add'])->name('mitra-add-portfolio');
     Route::put('/edit-portofolio', [MitraController::class, 'edit'])->name('mitra-edit-portfolio');
     Route::delete('/delete-portofolio', [MitraController::class, 'delete'])->name('mitra-delete-portfolio');
+});
+
+Route::prefix('admin')->group(function(){
+    Route::get('/', [PageController::class, 'adminUser'])->name('admin-user');
+    Route::put('/edit-user/{id}', [AdminController::class, 'editUser'])->name('admin-edit-user');
 });
 
 Route::prefix('login')->group(function (){

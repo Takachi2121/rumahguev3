@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -114,7 +115,7 @@ class PageController extends Controller
                 ->with('error', 'Silahkan login terlebih dahulu');
         }
 
-        return view('mitra.porto-add');
+        $users = User::orderBy('is_mitra', 'desc')->get();
+        return view('admin.user', compact('users'));
     }
-
 }

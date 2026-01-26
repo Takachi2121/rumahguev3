@@ -7,7 +7,7 @@
         </div>
 
         <!-- CENTER MENU -->
-        <div class="me-5 pe-3 d-lg-inline d-md-none d-sm-none navbar-menu">
+        <div class="me-3 d-lg-inline d-md-none d-sm-none navbar-menu">
             <a href="{{ route('rumahgue') }}" class="text-decoration-none item-nav">Beranda</a>
             <a href="javascript:void(0);" onclick="upcoming()" class="text-decoration-none item-nav">Simulasi Rumah</a>
             <a href="javascript:void(0);" onclick="upcoming()" class="text-decoration-none item-nav">Berita</a>
