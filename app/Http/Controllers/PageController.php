@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Session;
 
 class PageController extends Controller
 {
@@ -115,7 +118,82 @@ class PageController extends Controller
                 ->with('error', 'Silahkan login terlebih dahulu');
         }
 
-        $users = User::orderBy('is_mitra', 'desc')->get();
+        $users = User::where('is_mitra', '0')->orderBy('is_mitra', 'desc')->get();
         return view('admin.user', compact('users'));
     }
+
+    public function pengaturan(){
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
+        }
+
+        $data = User::find(Auth::id());
+
+        return view('pages.pengaturan', compact('data'));
+    }
+
+    public function pengaturanUpdate(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'namaUser' => 'required',
+            'emailUser' => 'required|email|unique:users,email,' . $user->id,
+            'passUser' => 'required',
+            'newPassUser' => 'nullable|min:6',
+            'passUserRepeat' => 'same:newPassUser',
+        ],[
+            'passUserRepeat.same' => 'Password Tidak Sama',
+            'namaUser.required' => 'Nama Tidak Boleh Kosong',
+            'emailUser.required' => 'Email Tidak Boleh Kosong',
+            'passUser.required' => 'Isi Password Sekarang untuk melakukan perubahan',
+            'emailUser.unique' => 'Email Sudah Terdaftar',
+            'newPassUser.min' => 'Password minimal 6 karakter',
+        ]);
+
+        if (!Hash::check($request->passUser, $user->password)) {
+            return response()->json(['message' => 'Password lama salah'], 422);
+        }
+
+        $otp = rand(100000, 999999);
+
+        Session::put('pending_data', [
+            'nama' => $request->namaUser,
+            'email' => $request->emailUser,
+            'password' => $request->newPassUser,
+            'otp' => $otp,
+            'created_at' => now()
+        ]);
+
+        Mail::send('email.change-user', [
+            'user_name' => $user->name,
+            'otp' => $otp
+        ], function($msg) use ($request) {
+            $msg->to($request->emailUser)->subject('Verifikasi Perubahan Data Diri Rumahgue');
+        });
+
+        return response()->json(['success' => true]);
+    }
+
+    public function pengaturanVerif(Request $request)
+    {
+        $data = Session::get('pending_data');
+        if (!$data || $request->otp != $data['otp']) {
+            return response()->json(['message' => 'OTP tidak valid'], 422);
+        }
+
+        $user = Auth::user();
+        $user->update([
+            'nama' => $data['nama'],
+            'email' => $data['email'],
+            'password' => $data['password']
+                ? Hash::make($data['password'])
+                : $user->password
+        ]);
+
+        Session::forget('pending_data');
+
+        return response()->json(['success' => true]);
+    }
+
 }

@@ -32,4 +32,14 @@ class AdminController extends Controller
             'message' => 'Data Berhasil Diubah'
         ]);
     }
+
+    public function hapusUser($id){
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Dihapus'
+        ]);
+    }
 }

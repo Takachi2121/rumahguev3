@@ -49,7 +49,7 @@
             });
                 Toast.fire({
                 icon: "error",
-                title: "{{ session('error') }}"
+                title: "{{ $message }}"
             });
         </script>
     @enderror

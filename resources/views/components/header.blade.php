@@ -31,9 +31,16 @@
                     {{ Auth::user()->nama }}
                 </button>
                 <ul class="dropdown-menu gap-2" aria-labelledby="dropdownMenuButton">
+                    @if (Auth::user()->is_mitra !== 0)
+                        <li><a class="dropdown-item" href="{{ route('mitra-home') }}">Dashboard</a></li>
+                        <hr class="my-1">
+                    @endif
                     <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="{{ route('rumahgue') }}">Beranda</a></li>
                     <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="{{ route('jasa') }}">Jasa Kami</a></li>
-                    <li><a class="dropdown-item" href="#">Pengaturan Akun</a></li>
+                    @if (Auth::user()->is_mitra === 0)
+                        <li><a class="dropdown-item" href="{{ route('pengaturan') }}">Pengaturan Akun</a></li>
+                        <hr class="my-1">
+                    @endif
                     <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
                 </ul>
             </div>

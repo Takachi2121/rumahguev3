@@ -11,6 +11,9 @@ Route::prefix('/')->group(function (){
     Route::get('/', [PageController::class, 'beranda'])->name('rumahgue');
     Route::get('/jasa-kami', [PageController::class, 'jasa'])->name('jasa');
     Route::get('/jasa-kami/{id}', [PageController::class, 'jasaDetail'])->name('jasa-detail');
+    Route::get('/pengaturan-user', [PageController::class, 'pengaturan'])->name('pengaturan');
+    Route::post('/update-user', [PageController::class, 'pengaturanUpdate'])->name('pengaturan-update');
+    Route::post('/verif-user', [PageController::class, 'pengaturanVerif'])->name('pengaturan-verif');
 });
 Route::get('/pengaturan', [PageController::class, 'mitraSettings'])->name('mitra-settings');
 

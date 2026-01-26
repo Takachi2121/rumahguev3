@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('assets/css/hero.css') }}">
 
-<div class="home-banner d-flex flex-column justify-content-center align-items-center text-center">
+<div class="home-banner d-flex flex-column justify-content-center align-items-center text-center mb-5">
     <!-- Video Background -->
     <video autoplay muted loop playsinline preload="none" class="home-video">
         <source src="{{ asset('assets/img/Hero.mp4') }}" type="video/mp4">

@@ -1,7 +1,9 @@
 <aside class="sidebar d-flex flex-column p-4" id="sidebar">
     <!-- Logo -->
     <div class="text-center mb-5">
-        <img src="{{ asset('assets/img/logo-login.png') }}" class="object-fit-contain" width="200" alt="Logo">
+        <a href="{{ route('rumahgue') }}">
+            <img src="{{ asset('assets/img/logo-login.png') }}" class="object-fit-contain" width="200" alt="Logo">
+        </a>
     </div>
 
     <!-- Navigation -->
