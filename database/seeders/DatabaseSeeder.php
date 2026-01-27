@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Mitra;
+use App\Models\MitraNotification;
 use App\Models\User;
 use Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,12 +20,25 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(MaterialSeeder::class);
         $this->call(RecommendSeeder::class);
-        // Mitra::factory(10)->create();
+        Mitra::factory(10)->create();
         User::create([
             'nama' => 'Admin Rumahgue',
             'email' => 'rumahgue@gmail.com',
             'password' => Hash::make('password'),
             'is_mitra' => 2
         ]);
+        User::create([
+            'nama' => 'Andre',
+            'email' => 'andremm73@gmail.com',
+            'password' => Hash::make('password'),
+            'is_mitra' => 1
+        ]);
+        User::create([
+            'nama' => 'Ryuta',
+            'email' => 'ntakachi73@gmail.com',
+            'password' => Hash::make('password'),
+            'is_mitra' => 0
+        ]);
+        MitraNotification::factory(10)->create();
     }
 }
