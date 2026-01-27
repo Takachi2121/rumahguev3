@@ -98,12 +98,27 @@ class AdminController extends Controller
             'is_mitra' => 1
         ]);
 
+        $wa = $request->whatsappMitra;
+
+        // buang spasi, strip, dll
+        $wa = preg_replace('/[^0-9+]/', '', $wa);
+
+        // kalau diawali +62 → buang +
+        if (str_starts_with($wa, '+62')) {
+            $wa = substr($wa, 1);
+        }
+
+        // kalau diawali 08 → ganti jadi 628
+        if (str_starts_with($wa, '08')) {
+            $wa = '628' . substr($wa, 2);
+        }
+
         // Update mitra
         $user->mitra->update([
             'deskripsi' => $request->deskripsiMitra,
             'keahlian' => $request->keahlianMitra,
             'alamat_mitra' => $request->alamatMitra,
-            'whatsapp' => $request->whatsappMitra,
+            'whatsapp' => $wa,
             'harga' => $request->hargaMitra,
         ]);
 
@@ -141,11 +156,26 @@ class AdminController extends Controller
             'is_mitra' => 1
         ]);
 
+        $wa = $request->whatsappMitra;
+
+        // buang spasi, strip, dll
+        $wa = preg_replace('/[^0-9+]/', '', $wa);
+
+        // kalau diawali +62 → buang +
+        if (str_starts_with($wa, '+62')) {
+            $wa = substr($wa, 1);
+        }
+
+        // kalau diawali 08 → ganti jadi 628
+        if (str_starts_with($wa, '08')) {
+            $wa = '628' . substr($wa, 2);
+        }
+
         $user->mitra()->create([
             'deskripsi' => $request->deskripsiMitra,
             'keahlian' => $request->keahlianMitra,
             'alamat_mitra' => $request->alamatMitra,
-            'whatsapp' => $request->whatsappMitra,
+            'whatsapp' => $wa,
             'harga' => $request->hargaMitra
         ]);
 

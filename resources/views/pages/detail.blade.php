@@ -56,10 +56,7 @@
             </span>
             <p class="harga-detail text-danger mt-3">Rp {{ number_format($jasa->harga,0,',','.') }}</p>
             <p class="mt-3">{{ $jasa->deskripsi }}</p>
-            <a href="https://wa.me/{{ $jasa->whatsapp }}?text={{ urlencode('Halo ' . $jasa->user->nama . ', saya melihat jasa Anda di RumahGue dan tertarik.
-            Saya ingin berdiskusi terlebih dahulu mengenai kebutuhan saya.
-            Terima kasih.
-            ') }}" target="_blank"
+            <a href="https://wa.me/{{ $jasa->whatsapp }}?text={{ urlencode('Halo ' . $jasa->user->nama . ', saya melihat jasa Anda di RumahGue dan tertarik. Saya ingin berdiskusi terlebih dahulu mengenai kebutuhan saya. Terima kasih.') }}" target="_blank"
                class="btn btn-danger py-2 w-100 mt-3">
                Hubungi via WhatsApp&nbsp;&nbsp;<i class="fa-brands fa-whatsapp fa-1x"></i>
             </a>
@@ -132,10 +129,7 @@
                     </span>
                     <p class="harga-detail text-danger mt-3">Rp {{ number_format($jasa->harga,0,',','.') }}</p>
                     <p class="mt-3">{{ $jasa->deskripsi }}</p>
-                    <a href="https://wa.me/{{ $jasa->whatsapp }}?text={{ urlencode('Halo ' . $jasa->user->nama . ', saya melihat jasa Anda di RumahGue dan tertarik.
-                        Saya ingin berdiskusi terlebih dahulu mengenai kebutuhan saya.
-                        Terima kasih.
-                        ') }}" target="_blank"
+                    <a href="https://wa.me/{{ $jasa->whatsapp }}?text={{ urlencode('Halo ' . $jasa->user->nama . ', saya melihat jasa Anda di RumahGue dan tertarik. Saya ingin berdiskusi terlebih dahulu mengenai kebutuhan saya.Terima kasih.') }}" target="_blank"
                         class="btn btn-danger py-2 w-100 mt-3">
                         Hubungi via WhatsApp&nbsp;&nbsp;<i class="fa-brands fa-whatsapp fa-1x"></i>
                     </a>

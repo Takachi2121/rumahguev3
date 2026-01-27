@@ -126,10 +126,25 @@ class MitraController extends Controller
             'email' => $request->emailMitra
         ]);
 
+        $wa = $request->waMitra;
+
+        // buang spasi, strip, dll
+        $wa = preg_replace('/[^0-9+]/', '', $wa);
+
+        // kalau diawali +62 → buang +
+        if (str_starts_with($wa, '+62')) {
+            $wa = substr($wa, 1);
+        }
+
+        // kalau diawali 08 → ganti jadi 628
+        if (str_starts_with($wa, '08')) {
+            $wa = '628' . substr($wa, 2);
+        }
+
         Mitra::where('user_id', $user->id)->update([
             'foto_profil' => $filename,
             'lokasi' => $request->lokasiMitra,
-            'whatsapp' => $request->waMitra,
+            'whatsapp' => $wa,
             'keahlian' => $request->keahlianMitra,
             'harga' => str_replace('.', '',$request->hargaMitra),
             'alamat_mitra' => $request->alamatMitra,

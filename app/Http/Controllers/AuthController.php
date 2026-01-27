@@ -128,6 +128,21 @@ class AuthController extends Controller
             'google_id' => null,
         ]);
 
+        $wa = $sessionData['whatsapp'];
+
+        // buang spasi, strip, dll
+        $wa = preg_replace('/[^0-9+]/', '', $wa);
+
+        // kalau diawali +62 → buang +
+        if (str_starts_with($wa, '+62')) {
+            $wa = substr($wa, 1);
+        }
+
+        // kalau diawali 08 → ganti jadi 628
+        if (str_starts_with($wa, '08')) {
+            $wa = '628' . substr($wa, 2);
+        }
+
         // Jika mitra → insert data mitra
         if ($isMitra) {
             DB::table('mitra')->insert([
@@ -135,7 +150,7 @@ class AuthController extends Controller
                 'deskripsi'     => null,
                 'keahlian'      => $sessionData['keahlian'],
                 'alamat_mitra'  => $sessionData['alamat'],
-                'whatsapp'      => $sessionData['whatsapp'],
+                'whatsapp'      => $wa,
                 'portfolio'     => null,
                 'portfolio2'    => null,
                 'portfolio3'    => null,
