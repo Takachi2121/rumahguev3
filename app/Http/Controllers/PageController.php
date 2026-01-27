@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
+use App\Models\MitraNotification;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;

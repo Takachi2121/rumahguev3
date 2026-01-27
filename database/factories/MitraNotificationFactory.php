@@ -19,7 +19,8 @@ class MitraNotificationFactory extends Factory
     {
         return [
             'message' => $this->faker->sentence(),
-            'user_id' => 12,
+            'mitra_id' => 12,
+            'user_id' => User::factory(),
         ];
     }
 }

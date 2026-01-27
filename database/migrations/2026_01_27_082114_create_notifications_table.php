@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string('message');
+            $table->foreignId('mitra_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->enum('is_read', ['0', '1'])->default('0')->comment('0 = belum dibaca, 1 = sudah dibaca');
             $table->timestamps();
