@@ -32,11 +32,13 @@
                 </button>
                 <ul class="dropdown-menu gap-2" aria-labelledby="dropdownMenuButton">
                     @if (Auth::user()->is_mitra !== 0)
-                        <li><a class="dropdown-item" href="{{ route('mitra-home') }}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{{ route(Auth::user()->is_mitra === 1 ? 'mitra-home' : 'admin-user') }}">Dashboard</a></li>
                         <hr class="my-1">
                     @endif
                     <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="{{ route('rumahgue') }}">Beranda</a></li>
-                    <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="{{ route('jasa') }}">Jasa Kami</a></li>
+                    <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="javascript:void(0);" onclick="upcoming()">Simulasi Rumah</a></li>
+                    <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="javascript:void(0);" onclick="upcoming()">Berita</a></li>
+                    <hr class="d-lg-none d-md-block d-sm-block my-1">
                     @if (Auth::user()->is_mitra === 0)
                         <li><a class="dropdown-item" href="{{ route('pengaturan') }}">Pengaturan Akun</a></li>
                         <hr class="my-1">
