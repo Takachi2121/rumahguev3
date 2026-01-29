@@ -33,6 +33,17 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'is_mitra' => 1
         ]);
+        Mitra::create([
+            'user_id' => 12,
+            'deskripsi' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam magnam, qui pariatur molestiae labore est quisquam quasi, modi eaque, impedit dolores error reiciendis tenetur doloribus at aut. Natus, doloremque consectetur!',
+            'keahlian' => 'Interior',
+            'alamat_mitra' => 'Stadion Timur',
+            'lokasi' => 'Yogyakarta',
+            'harga' => 5000000,
+            'whatsapp' => '08999999999',
+            'foto_profil' => 'default.jpg'
+        ]);
+
         User::create([
             'nama' => 'Ryuta',
             'email' => 'ntakachi73@gmail.com',

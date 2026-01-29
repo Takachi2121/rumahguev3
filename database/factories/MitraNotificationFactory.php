@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Mitra;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +20,7 @@ class MitraNotificationFactory extends Factory
         return [
             'message' => $this->faker->sentence(),
             'mitra_id' => 12,
-            'user_id' => User::factory(),
+            'user_id' => Mitra::factory(),
         ];
     }
 }

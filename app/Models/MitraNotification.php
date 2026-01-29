@@ -16,6 +16,7 @@ class MitraNotification extends Model
         'title',
         'message',
         'user_id',
+        'mitra_id'
     ];
 
     public function mitra()
