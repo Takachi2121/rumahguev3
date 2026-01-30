@@ -117,6 +117,7 @@ class AdminController extends Controller
         $user->mitra->update([
             'deskripsi' => $request->deskripsiMitra,
             'keahlian' => $request->keahlianMitra,
+            'lokasi' => $request->lokasiMitra,
             'alamat_mitra' => $request->alamatMitra,
             'whatsapp' => $wa,
             'harga' => $request->hargaMitra,
@@ -174,6 +175,7 @@ class AdminController extends Controller
         $user->mitra()->create([
             'deskripsi' => $request->deskripsiMitra,
             'keahlian' => $request->keahlianMitra,
+            'lokasi' => $request->lokasiMitra,
             'alamat_mitra' => $request->alamatMitra,
             'whatsapp' => $wa,
             'harga' => $request->hargaMitra
