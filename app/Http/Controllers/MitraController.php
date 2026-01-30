@@ -169,7 +169,7 @@ class MitraController extends Controller
 
         // Cari slot portofolio kosong
         for($i=1; $i<=5; $i++){
-            $slot = $i === 1 ? 'portfolio' : 'portfolio'.$i;
+            $slot = $i == 1 ? 'portfolio' : 'portfolio'.$i;
             if(empty($mitra->$slot)){
                 $file = $request->file('portfolio');
                 $filename = time().'_'.$file->getClientOriginalName();
