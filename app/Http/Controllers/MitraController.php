@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
+use App\Models\MitraNotification;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -243,4 +244,43 @@ class MitraController extends Controller
         return response()->json(['success'=>false, 'message'=>'Portofolio tidak ditemukan']);
     }
 
+    public function notifikasi()
+    {
+        if (!auth()->check() || auth()->user()->is_mitra !== 1) {
+            return response()->json([]);
+        }
+
+        // Ambil semua notifikasi terbaru untuk mitra
+        $notif = MitraNotification::with('user:id,nama')
+            ->where('mitra_id', auth()->id())
+            ->limit(6)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($notif);
+    }
+
+    public function notifRead()
+    {
+        MitraNotification::where('mitra_id', auth()->id())
+            ->where('is_read', '0')
+            ->update(['is_read' => '1']);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function notifCreate(Request $request){
+        if(!Auth::check()){
+            return response()->json(['success' => false, 'message' => 'Silahkan login terlebih dahulu']);
+        }
+
+        $notif = MitraNotification::create([
+            'is_read' => '0',
+            'user_id' => Auth::id(),
+            'mitra_id' => Mitra::where('id', $request->jasa_id)->first()->user->id,
+            'message' => 'Baru Saja Menghubungi Anda di Whatsapp!'
+        ]);
+
+        return response()->json($notif);
+    }
 }

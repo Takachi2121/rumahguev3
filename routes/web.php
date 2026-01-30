@@ -14,6 +14,9 @@ Route::prefix('/')->group(function (){
     Route::get('/pengaturan-user', [PageController::class, 'pengaturan'])->name('pengaturan');
     Route::post('/update-user', [PageController::class, 'pengaturanUpdate'])->name('pengaturan-update');
     Route::post('/verif-user', [PageController::class, 'pengaturanVerif'])->name('pengaturan-verif');
+    Route::get('/notifikasi', [MitraController::class, 'notifikasi'])->name('notifikasi');
+    Route::post('/notif-read', [MitraController::class, 'notifRead'])->name('notifikasi-read');
+    Route::post('/notif-create', [MitraController::class, 'notifCreate'])->name('notifikasi-create');
 });
 Route::get('/pengaturan', [PageController::class, 'mitraSettings'])->name('mitra-settings');
 

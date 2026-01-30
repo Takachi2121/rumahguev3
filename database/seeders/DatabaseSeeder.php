@@ -50,6 +50,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'is_mitra' => 0
         ]);
-        MitraNotification::factory(10)->create();
+        // MitraNotification::factory(10)->create();
     }
 }

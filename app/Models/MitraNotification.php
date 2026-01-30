@@ -19,8 +19,16 @@ class MitraNotification extends Model
         'mitra_id'
     ];
 
+     // USER yang mengirim notif
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // MITRA penerima notif (juga user)
     public function mitra()
     {
-        return $this->belongsTo(Mitra::class);
+        return $this->belongsTo(Mitra::class, 'mitra_id');
     }
+
 }

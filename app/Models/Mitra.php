@@ -34,6 +34,6 @@ class Mitra extends Model
 
     public function mitraNotification()
     {
-        return $this->hasMany(MitraNotification::class);
+        return $this->hasMany(MitraNotification::class, 'mitra_id', 'user_id');
     }
 }

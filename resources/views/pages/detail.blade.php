@@ -56,10 +56,44 @@
             </span>
             <p class="harga-detail text-danger mt-3">Rp {{ number_format($jasa->harga,0,',','.') }}</p>
             <p class="mt-3">{{ $jasa->deskripsi }}</p>
-            <a href="https://wa.me/{{ $jasa->whatsapp }}?text={{ urlencode('Halo ' . $jasa->user->nama . ', saya melihat jasa Anda di RumahGue dan tertarik. Saya ingin berdiskusi terlebih dahulu mengenai kebutuhan saya. Terima kasih.') }}" target="_blank"
-               class="btn btn-danger py-2 w-100 mt-3">
-               Hubungi via WhatsApp&nbsp;&nbsp;<i class="fa-brands fa-whatsapp fa-1x"></i>
+            <a href="javascript:void(0);"
+            class="btn btn-danger py-2 w-100 mt-3"
+            onclick="contactViaWhatsapp('{{ $jasa->id }}', '{{ $jasa->user->nama }}', '{{ $jasa->whatsapp }}')">
+            Hubungi via WhatsApp&nbsp;&nbsp;<i class="fa-brands fa-whatsapp fa-1x"></i>
             </a>
+
+            <script>
+            function contactViaWhatsapp(jasaId, namaMitra, waNumber) {
+                const tokenMeta = document.querySelector('meta[name="csrf-token"]');
+                if(!tokenMeta) {
+                    console.error('CSRF token not found!');
+                    return;
+                }
+
+                // 1. Buat notifikasi dulu
+                fetch('/notif-create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': tokenMeta.content
+                    },
+                    body: JSON.stringify({
+                        jasa_id: jasaId,
+                        message: `User menghubungi Mitra ${namaMitra} via WhatsApp`
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // 2. Buka WhatsApp di tab baru
+                    const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(
+                        'Halo ' + namaMitra + ', saya melihat jasa Anda di RumahGue dan tertarik. Saya ingin berdiskusi terlebih dahulu mengenai kebutuhan saya. Terima kasih.'
+                    )}`;
+                    window.open(waLink, '_blank');
+                })
+                .catch(err => console.error(err));
+            }
+            </script>
+
         </div>
     </div>
 
@@ -129,8 +163,9 @@
                     </span>
                     <p class="harga-detail text-danger mt-3">Rp {{ number_format($jasa->harga,0,',','.') }}</p>
                     <p class="mt-3">{{ $jasa->deskripsi }}</p>
-                    <a href="https://wa.me/{{ $jasa->whatsapp }}?text={{ urlencode('Halo ' . $jasa->user->nama . ', saya melihat jasa Anda di RumahGue dan tertarik. Saya ingin berdiskusi terlebih dahulu mengenai kebutuhan saya.Terima kasih.') }}" target="_blank"
-                        class="btn btn-danger py-2 w-100 mt-3">
+                    <a href="javascript:void(0);"
+                        class="btn btn-danger py-2 w-100 mt-3"
+                        onclick="contactViaWhatsapp('{{ $jasa->id }}', '{{ $jasa->user->nama }}', '{{ $jasa->whatsapp }}')">
                         Hubungi via WhatsApp&nbsp;&nbsp;<i class="fa-brands fa-whatsapp fa-1x"></i>
                     </a>
                 </div>
