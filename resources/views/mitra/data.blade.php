@@ -28,8 +28,22 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Lokasi</label>
-                                <input type="text" name="lokasiMitra" value="{{ $mitra->lokasi }}" class="form-control" placeholder="Lokasi Mitra">
+                                <select name="lokasiMitra" class="form-control">
+                                    <option selected hidden>Pilih Lokasi</option>
+                                    @include('parts.kota')
+                                </select>
                             </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const lokasiMitra = @json($mitra->lokasi);
+                                    const selectLokasi = document.querySelector('select[name="lokasiMitra"]');
+
+                                    if (selectLokasi && lokasiMitra) {
+                                        selectLokasi.value = lokasiMitra;
+                                    }
+                                });
+                            </script>
 
                             <div class="mb-3">
                                 <label class="form-label">Whatsapp Aktif</label>
