@@ -246,13 +246,13 @@ class MitraController extends Controller
 
     public function notifikasi()
     {
-        if (!auth()->check() || auth()->user()->is_mitra !== 1) {
-            return response()->json([]);
+        if (!Auth::check() || Auth::user()->is_mitra != 1) {
+            return response()->json(['error' => 'Anda bukan mitra']);
         }
 
         // Ambil semua notifikasi terbaru untuk mitra
         $notif = MitraNotification::with('user:id,nama')
-            ->where('mitra_id', auth()->id())
+            ->where('mitra_id', Auth::id())
             ->limit(6)
             ->orderBy('created_at', 'desc')
             ->get();
