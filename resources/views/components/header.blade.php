@@ -149,7 +149,7 @@
                     </button>
 
                     <ul class="dropdown-menu gap-2" aria-labelledby="dropdownMenuButton">
-                        @if (Auth::user()->is_mitra !== 0)
+                        @if (Auth::user()->is_mitra != 0)
                             <li>
                                 <a class="dropdown-item"
                                 href="{{ route(Auth::user()->is_mitra == 1 ? 'mitra-home' : 'admin-user') }}">
