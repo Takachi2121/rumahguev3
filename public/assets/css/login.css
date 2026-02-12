@@ -22,6 +22,20 @@
     width: 60%;
 }
 
+@media (max-width:672px) {
+    .login-form {
+        width: 95%;
+    }
+
+    .user-regis-form{
+        width: 95%;
+    }
+
+    .worker-regis-form{
+        width: 95%;
+    }
+}
+
 .input-login {
     border-radius: 42px;
     padding: 15px 20px;
