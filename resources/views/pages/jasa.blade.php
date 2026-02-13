@@ -18,14 +18,14 @@
                     <input
                     type="range"
                     class="form-range"
-                    min="1000000"
+                    min="0"
                     max="10000000"
                     step="500000"
                     id="priceRange"
-                    value="1000000"
+                    value="0"
                     >
                     <span class="fw-semibold">
-                        Rp <span id="priceValue">1.000.000</span>
+                        Rp <span id="priceValue">0</span>
                     </span>
                 </div>
                 <div class="col-md-6 mt-sm-3">
