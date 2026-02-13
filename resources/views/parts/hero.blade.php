@@ -32,17 +32,17 @@
             <div class="row g-2 align-items-center">
                 <p class="fw-normal text-black text-start fs-5 mb-2">Cari Jasa</p>
                 <div class="col-md">
-                    <a href="javascript:void(0)" onclick="upcomingJasa()" class="btn btn-light w-100 text-start home-search-btn">
+                    <a href="{{ route('jasa', ['kategori' => 'Tukang']) }}" class="btn btn-light w-100 text-start home-search-btn">
                         <i class="fa-solid fa-hammer me-2"></i> Jasa Tukang
                     </a href="javascript:void(0)">
                 </div>
                 <div class="col-md">
-                    <a href="{{ route('jasa') }}" class="btn btn-light w-100 text-start home-search-btn">
+                    <a href="{{ route('jasa', ['kategori' => 'Interior']) }}" class="btn btn-light w-100 text-start home-search-btn">
                         <i class="fa-solid fa-couch me-2"></i> Jasa Interior
                     </a href="javascript:void(0)">
                 </div>
                 <div class="col-md">
-                    <a href="javascript:void(0)" onclick="upcomingJasa()" class="btn btn-light w-100 text-start home-search-btn">
+                    <a href="{{ route('jasa', ['kategori' => 'Arsitek']) }}" class="btn btn-light w-100 text-start home-search-btn">
                         <i class="fa-solid fa-compass-drafting me-2"></i> Jasa Arsitek
                     </a href="javascript:void(0)">
                 </div>

@@ -6,8 +6,8 @@
     {{-- HEADER --}}
     <div class="row header-row align-items-center mb-4">
         <div class="col-md-6">
-            <h1 class="fw-normal fs-3 mb-0">Jasa Interior</h1>
-            <small class="text-muted">Pilih mitra interior sesuai estimasi harga</small>
+            <h1 class="fw-normal fs-3 mb-0">{{ $title }}</h1>
+            <small class="text-muted">{{ $subtitle }}</small>
         </div>
 
         {{-- FILTER --}}

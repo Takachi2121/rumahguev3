@@ -19,16 +19,30 @@ class PageController extends Controller
     }
 
 
-    public function jasa()
+    public function jasa(Request $request)
     {
         if(!Auth::check()){
             return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
         }
 
+        $kategori = $request->query('kategori');
+
+        if($kategori == 'Interior'){
+            $title = 'Jasa Interior';
+            $subtitle = 'Temukan Mitra Terbaik untuk Desain Interior Impian Anda';
+        }elseif($kategori == 'Arsitek'){
+            $title = 'Jasa Arsitek';
+            $subtitle = 'Wujudkan Bangunan Impian Anda dengan Bantuan Arsitek Profesional';
+        }elseif($kategori == 'Tukang'){
+            $title = 'Jasa Tukang';
+            $subtitle = 'Mitra Tukang Terpercaya untuk Semua Kebutuhan Perbaikan Rumah Anda';
+        }
+
         $jasa = Mitra::with('user:id,nama')
+            ->where('keahlian', 'LIKE', "%$kategori%")
             ->get(['id', 'user_id', 'harga', 'foto_profil', 'keahlian', 'lokasi']);
         $lokasi = Mitra::select('lokasi')->distinct()->get();
-        return view('pages.jasa', compact('jasa', 'lokasi'));
+        return view('pages.jasa', compact('jasa', 'lokasi', 'title', 'subtitle'));
     }
 
     public function jasaDetail($id)
