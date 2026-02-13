@@ -46,7 +46,7 @@
 
         @forelse ($jasa as $data)
             <div
-                class="col-md-3 mb-4 jasa-card"
+                class="col-lg-3 col-md-6 col-sm-12 mb-4 jasa-card"
                 data-price="{{ $data->harga }}"
                 data-lokasi="{{ $data->lokasi }}"
             >
