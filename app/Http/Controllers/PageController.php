@@ -60,27 +60,27 @@ class PageController extends Controller
             ] : null,
 
             $jasa->portfolio ? [
-                'path' => 'assets/img/Portfolio/Ray/',
+                'path' => 'assets/img/Portfolio/' . $jasa->user->nama . '/',
                 'file' => $jasa->portfolio
             ] : null,
 
             $jasa->portfolio2 ? [
-                'path' => 'assets/img/Portfolio/Ray/',
+                'path' => 'assets/img/Portfolio/' . $jasa->user->nama . '/',
                 'file' => $jasa->portfolio2
             ] : null,
 
             $jasa->portfolio3 ? [
-                'path' => 'assets/img/Portfolio/Ray/',
+                'path' => 'assets/img/Portfolio/' . $jasa->user->nama . '/',
                 'file' => $jasa->portfolio3
             ] : null,
 
             $jasa->portfolio4 ? [
-                'path' => 'assets/img/Portfolio/Ray/',
+                'path' => 'assets/img/Portfolio/' . $jasa->user->nama . '/',
                 'file' => $jasa->portfolio4
             ] : null,
 
             $jasa->portfolio5 ? [
-                'path' => 'assets/img/Portfolio/Ray/',
+                'path' => 'assets/img/Portfolio/' . $jasa->user->nama . '/',
                 'file' => $jasa->portfolio5
             ] : null,
         ]);
