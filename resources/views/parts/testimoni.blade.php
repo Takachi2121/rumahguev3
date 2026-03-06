@@ -32,7 +32,7 @@
         <p class="label-title mb-0 text-center bg-transparent" data-aos="zoom-out-down" data-aos-duration="1000" data-aos-once="true">Testimoni</p>
         <p class="fw-semibold text-center mt-4 mb-0" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Percayakan Semuanya Kepada Kami</p>
         <p class="fw-light text-center my-0 mx-auto" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Lihat bagaimana klien mempercayakan rumah dan proyek mereka kepada kami.</p>
-        <img src="{{ asset('assets/img/LandingPage/TESTIMONI.png') }}" class="line-testi">
+        <p class="text-white fw-semibold mb-0 text-uppercase testi-huge text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">testimoni</p>
     </div>
 </div>
 
