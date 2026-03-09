@@ -57,6 +57,7 @@
                     </div>
 
                     <!-- Card Body -->
+                    <a href="{{ route('jasa-detail', $item->id) }}" class="text-decoration-none text-black">
                     <div class="card-body">
 
                         <!-- Avatar + Name -->
@@ -85,11 +86,12 @@
                         </div>
 
                         <!-- Description -->
-                        <p class="text-muted small mb-0">
-                            {{ Str::limit($item->deskripsi, 90) }}
+                        <p class="text-muted small mb-0" style="text-align:justify;">
+                            {{ Str::limit($item->deskripsi, 90, '...') }}
                         </p>
 
                     </div>
+                    </a>
 
                 </div>
 

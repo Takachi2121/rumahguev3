@@ -7,5 +7,7 @@
 
     @include('parts.list')
 
+    @include('parts.simulasi')
+
     @include('parts.testimoni')
 @endsection
