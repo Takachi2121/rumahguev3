@@ -5,5 +5,7 @@
 
     @include('parts.ads')
 
+    @include('parts.list')
+
     @include('parts.testimoni')
 @endsection

@@ -15,7 +15,15 @@ class PageController extends Controller
 {
     public function beranda()
     {
-        return view('parts.beranda');
+        $allJasa = Mitra::all();
+
+        if ($allJasa->count() >= 4) {
+            $jasa = $allJasa->random(4);
+        } else {
+            $jasa = $allJasa;
+        }
+
+        return view('parts.beranda', compact('jasa'));
     }
 
 
@@ -36,11 +44,18 @@ class PageController extends Controller
         }elseif($kategori == 'Tukang'){
             $title = 'Jasa Tukang';
             $subtitle = 'Mitra Tukang Terpercaya untuk Semua Kebutuhan Perbaikan Rumah Anda';
+        }else{
+            $title = 'Rekomendasi Gue';
+            $subtitle = 'Temukan Mitra Terbaik untuk Bangunan Impian Anda';
         }
 
-        $jasa = Mitra::with('user:id,nama')
+        if($kategori){
+            $jasa = Mitra::with('user:id,nama')
             ->where('keahlian', 'LIKE', "%$kategori%")
             ->get(['id', 'user_id', 'harga', 'foto_profil', 'keahlian', 'lokasi']);
+        }else{
+            $jasa = Mitra::all();
+        }
         $lokasi = Mitra::select('lokasi')->distinct()->get();
         return view('pages.jasa', compact('jasa', 'lokasi', 'title', 'subtitle'));
     }
