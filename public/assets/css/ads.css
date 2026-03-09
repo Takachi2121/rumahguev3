@@ -2,10 +2,10 @@
     width: 10px;
     height: 10px;
     background: #fff;
-    opacity: .5;
+    opacity: 0.5;
 }
 
-.hero-swiper{
+.hero-swiper {
     border-radius: 12px;
     overflow: hidden;
     width: 100%;
@@ -40,19 +40,17 @@
     pointer-events: none;
 }
 
-.slide-content a{
-    border-radius: 12px;
-    background-color: red;
-    color: white;
-    padding: 12px 36px;
-    border: 1px solid white;
+.slide-content a {
+    border-radius: 64px;
+    background-color: white;
+    color: black;
+    padding: 10px 43px;
+    letter-spacing: 1px;
+    font-weight: 300 !important;
     transition: all 0.3s ease;
-    box-shadow: inset 0px 0px 2px rgba(255, 0, 0, 0.2);
+    box-shadow: inset 0px 0px 2px rgba(184, 186, 188, 1);
 }
 
-.slide-content a:hover{
-    background-color: white;
-    color: red;
-    border: 1px solid white;
-    box-shadow: inset 0px 0px 2px rgba(184, 186, 188, 1);
+.slide-content a:hover {
+    box-shadow: inset 0px 3px 2px rgba(0, 0, 0, 0.25);
 }

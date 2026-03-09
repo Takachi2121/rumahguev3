@@ -15,7 +15,7 @@
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum cumque doloribus amet ipsam molestias eveniet, est cupiditate, facere eaque fugit reiciendis labore totam sed quas, ducimus velit aspernatur suscipit ipsa.
                         </p>
                         <br>
-                        <a href="" class="text-decoration-none fw-medium">
+                        <a href="" class="text-decoration-none">
                             Lihat Promo
                         </a>
                     </div>
