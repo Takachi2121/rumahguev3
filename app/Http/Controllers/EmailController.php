@@ -6,30 +6,50 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Mail\SendRABMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController
 {
     public function send(Request $request){
-        if(!Auth::check()){
-            return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
+        try {
+
+            if (!Auth::check()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Silahkan login terlebih dahulu'
+                ]);
+            }
+
+            $request->validate([
+                'rab' => 'required|array'
+            ]);
+
+            $target = Auth::user()->email;
+
+            if (!$target) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Email user tidak ditemukan'
+                ]);
+            }
+
+            Mail::to($target)->send(new SendRABMail($request->rab));
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Email terkirim'
+            ]);
+
+        } catch (\Exception $e) {
+
+            Log::error('Send RAB Mail Error: ' . $e->getMessage());
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal mengirim email'
+            ], 500);
         }
-
-        $request->validate([
-            'rab' => 'required|array'
-        ]);
-
-        $target = Auth::user()->email;
-        if(!$target){
-            return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
-        }
-
-        Mail::to($target)->send(new SendRABMail($request->rab));
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Email terkirim'
-        ]);
     }
 
     public function previewPDF(Request $request)
