@@ -173,3 +173,7 @@ function sendRAB() {
         });
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    sendRAB();
+});
