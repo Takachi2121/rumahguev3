@@ -22,7 +22,7 @@ class SendRABMail extends Mailable
         $this->rabContent = $rabContent;
 
         // Render terlebih dahulu untuk menghitung jumlah halaman
-        $pdf = Pdf::loadView('pdf.rab', [
+        $pdf = Pdf::loadView('PDF.rab', [
             'rab' => $this->rabContent,
             'user' => auth()->user(), // opsional, jika dipakai di view
             'jumlah_halaman' => null // dummy dulu
@@ -32,7 +32,7 @@ class SendRABMail extends Mailable
         $jumlah_halaman = $pdf->getDomPDF()->get_canvas()->get_page_count();
 
         // Buat ulang view PDF dengan jumlah halaman yang benar
-        $this->pdfData = Pdf::loadView('pdf.rab', [
+        $this->pdfData = Pdf::loadView('PDF.rab', [
             'rab' => $this->rabContent,
             'user' => auth()->user(),
             'jumlah_halaman' => $jumlah_halaman
