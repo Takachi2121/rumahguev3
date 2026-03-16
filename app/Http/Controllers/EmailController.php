@@ -32,22 +32,29 @@ class EmailController
         ]);
     }
 
-    public function previewPDF(Request $request){
-        $rab = $request->input('rab');
-        $user = Auth::user();
+    public function previewPDF(Request $request)
+{
+    $rab = $request->input('rab');
+    $user = Auth::user();
 
-        // $pdf = Pdf::loadView('PDF.rab', compact('rab', 'user'));
-        // $pdf->getDomPDF()->render();
-        // $jumlah_halaman = $pdf->getDomPDF()->get_canvas()->get_page_count();
-
-        $pdf = Pdf::loadView('PDF.rab', compact('rab','user'))
+    // load dulu
+    $pdf = Pdf::loadView('PDF.rab', compact('rab','user'))
         ->setPaper('a4','portrait');
 
-        return $pdf->stream('PDF.rab');
-        // return view('PDF.rab', [
-        //     'rab' => $rab,
-        //     'user' => $user,
-        //     'jumlah_halaman' => $jumlah_halaman
-        // ]);
-    }
+    // render dulu
+    $dompdf = $pdf->getDomPDF();
+    $dompdf->render();
+
+    // ambil jumlah halaman
+    $jumlah_halaman = $dompdf->get_canvas()->get_page_count();
+
+    // load ulang view dengan jumlah halaman
+    $pdf = Pdf::loadView('PDF.rab', [
+        'rab' => $rab,
+        'user' => $user,
+        'jumlah_halaman' => $jumlah_halaman
+    ])->setPaper('a4','portrait');
+
+    return $pdf->stream('rab.pdf');
+}
 }
