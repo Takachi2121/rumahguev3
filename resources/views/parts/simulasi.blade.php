@@ -97,7 +97,7 @@
                             <div class="position-relative">
                                 <input
                                     type="text"
-                                    class="form-control bg-danger-subtle"
+                                    class="form-control input-simulasi bg-danger-subtle"
                                     id="l-tanah"
                                     readonly
                                 >
@@ -114,7 +114,7 @@
                             <div class="position-relative">
                                 <input
                                     type="text"
-                                    class="form-control bg-danger-subtle"
+                                    class="form-control input-simulasi bg-danger-subtle"
                                     id="l-bangunan"
                                     readonly
                                 >
@@ -132,7 +132,7 @@
                                 <input
                                     type="text"
                                     id="l-carpot"
-                                    class="form-control bg-danger-subtle"
+                                    class="form-control input-simulasi bg-danger-subtle"
                                     readonly
                                 >
 
@@ -149,7 +149,7 @@
                                 <input
                                     type="text"
                                     id="l-rth"
-                                    class="form-control bg-danger-subtle"
+                                    class="form-control input-simulasi bg-danger-subtle"
                                     readonly
                                 >
 

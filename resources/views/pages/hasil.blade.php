@@ -130,7 +130,7 @@
                     Loading...
                 </span>
             </button>
-            {{-- <form id="send-rab-form" class="d-inline-block" data-url="{{ route('send-rab') }}">
+            <form id="send-rab-form" class="d-inline-block" data-url="{{ route('send-rab') }}">
                 @csrf
                 <button type="submit" class="btn btn-danger text-white rounded-2" id="email-btn">
                     <span class="btn-text">
@@ -141,7 +141,7 @@
                         Loading...
                     </span>
                 </button>
-            </form> --}}
+            </form>
         </div>
     </div>
     @endif
