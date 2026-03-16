@@ -6,6 +6,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Mail\SendRABMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController
@@ -33,21 +34,29 @@ class EmailController
     }
 
     public function previewPDF(Request $request){
-        $rab = $request->input('rab');
-        $user = Auth::user();
+        // $rab = $request->input('rab');
+        // $user = Auth::user();
 
         // $pdf = Pdf::loadView('PDF.rab', compact('rab', 'user'));
         // $pdf->getDomPDF()->render();
         // $jumlah_halaman = $pdf->getDomPDF()->get_canvas()->get_page_count();
 
-        $pdf = Pdf::loadView('PDF.rab', compact('rab','user'))
-        ->setPaper('a4','portrait');
-
-        return $pdf->stream('rab.pdf');
         // return view('PDF.rab', [
         //     'rab' => $rab,
         //     'user' => $user,
         //     'jumlah_halaman' => $jumlah_halaman
         // ]);
+
+        try {
+            $pdf = Pdf::loadView('PDF.rab', compact('rab','user'))
+                ->setPaper('a4','portrait');
+
+            return response($pdf->output(), 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'inline; filename="rab.pdf"');
+        } catch (\Exception $e) {
+            Log::error('PDF RAB Error: ' . $e->getMessage());
+            return response()->json(['message' => 'Gagal membuat PDF'], 500);
+        }
     }
 }
