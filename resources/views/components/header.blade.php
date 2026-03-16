@@ -9,7 +9,7 @@
         <!-- CENTER MENU -->
         <div class="me-3 d-lg-inline d-md-none d-sm-none navbar-menu">
             <a href="{{ route('rumahgue') }}" class="text-decoration-none item-nav">Beranda</a>
-            <a href="javascript:void(0);" onclick="upcoming()" class="text-decoration-none item-nav">Simulasi Rumah</a>
+            <a href="{{ route('rumahgue') }}/#simulasi-rumah" class="text-decoration-none item-nav">Simulasi Rumah</a>
             <a href="javascript:void(0);" onclick="upcoming()" class="text-decoration-none item-nav">Berita</a>
         </div>
 
@@ -160,7 +160,7 @@
                         @endif
 
                         <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="{{ route('rumahgue') }}">Beranda</a></li>
-                        <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="javascript:void(0);" onclick="upcoming()">Simulasi Rumah</a></li>
+                        <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="{{ route('rumahgue') }}/#simulasi-rumah">Simulasi Rumah</a></li>
                         <li><a class="dropdown-item d-lg-none d-md-block d-sm-block" href="javascript:void(0);" onclick="upcoming()">Berita</a></li>
                         <hr class="d-lg-none d-md-block d-sm-block my-1">
 

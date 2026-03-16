@@ -62,7 +62,7 @@ body {
 }
 
 body {
-    background: linear-gradient(to bottom, #ffffff 0%, #cdd3df 100%);
+    background: radial-gradient(center, #ffffff 0%, #cdd3df 100%) no-repeat;
     background-repeat: no-repeat;
 }
 

@@ -1,6 +1,5 @@
 <section class="my-5">
     <div class="container">
-
         <style>
             .jasa-card{
                 border-radius:12px;

@@ -25,7 +25,12 @@
                     value="0"
                     >
                     <span class="fw-semibold">
-                        Rp <span id="priceValue">0</span>
+                        Rp <span id="priceValue">0</span> /
+                        @if (Request()->query('kategori') == 'Tukang')
+                            Hari
+                        @else
+                            m<sup>2</sup>
+                        @endif
                     </span>
                 </div>
                 <div class="col-md-6 mt-sm-3">
@@ -73,7 +78,12 @@
                             <p class="mb-2">
                                 Estimasi mulai dari <br>
                                 <strong class="text-danger">
-                                    Rp {{ number_format($data->harga,0,',','.') }}
+                                    Rp {{ number_format($data->harga,0,',','.') }} /
+                                    @if (Request()->query('kategori') == 'Tukang')
+                                        Hari
+                                    @else
+                                        m<sup>2</sup>
+                                    @endif
                                 </strong>
                             </p>
                             <a href="{{ route('jasa-detail', $data->id) }}" class="btn btn-outline-danger py-2 btn-sm w-100">

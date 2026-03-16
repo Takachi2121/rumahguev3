@@ -1,5 +1,5 @@
 /* BACKGROUND */
-.simulasi {
+.simulasi-div {
     background-image: url("../img/LandingPage/bg-simulasi.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -7,14 +7,6 @@
 
     position: relative;
     overflow: hidden;
-}
-
-/* overlay */
-.simulasi::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35);
 }
 
 .simulasi > * {
@@ -106,4 +98,21 @@
     .hero-content p {
         font-size: 14px;
     }
+}
+
+.tombol-lokasi button.active {
+    background-color: #fd0c10;
+    color: white;
+}
+
+#lantai-naik.active,
+#lantai-turun.active {
+    background-color: #fd0c10 !important;
+    color: white !important;
+}
+
+#lantai-turun:not(.active),
+#lantai-naik:not(.active) {
+    background-color: var(--bs-dark-bg-subtle) !important;
+    color: white !important;
 }

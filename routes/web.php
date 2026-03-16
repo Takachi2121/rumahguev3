@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RABController;
+use App\Http\Controllers\RecommendController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +14,13 @@ Route::prefix('/')->group(function (){
     Route::get('/', [PageController::class, 'beranda'])->name('rumahgue');
     Route::get('/jasa-kami', [PageController::class, 'jasa'])->name('jasa');
     Route::get('/jasa-kami/{id}', [PageController::class, 'jasaDetail'])->name('jasa-detail');
+
+    Route::get('/hasil', [PageController::class, 'hasil'])->name('hasil-rekomendasi');
+    Route::post('/send-rab', [EmailController::class, 'send'])->name('send-rab');
+    Route::post('/getRecommend', [RecommendController::class, 'getRecommend'])->name('get-recommend');
+    Route::post('/getRab', [RABController::class, 'getRAB'])->name('get-rab');
+    Route::post('/preview-rab', [EmailController::class,'previewPDF'])->name('preview-rab');
+
     Route::get('/pengaturan-user', [PageController::class, 'pengaturan'])->name('pengaturan');
     Route::post('/update-user', [PageController::class, 'pengaturanUpdate'])->name('pengaturan-update');
     Route::post('/verif-user', [PageController::class, 'pengaturanVerif'])->name('pengaturan-verif');

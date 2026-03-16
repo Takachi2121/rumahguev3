@@ -108,6 +108,12 @@ class PageController extends Controller
         return view('pages.detail', compact('jasa', 'sliderImages', 'relatedJasa'));
     }
 
+    public function hasil(){
+        return view('pages.hasil');
+    }
+
+    // Mitra Page
+
     public function mitraHome()
     {
         if(!Auth::check() || Auth::user()->is_mitra != 1){
@@ -140,6 +146,8 @@ class PageController extends Controller
 
         return view('mitra.porto', compact('mitra'));
     }
+
+    // Admin Page
 
     public function adminUser()
     {
@@ -234,5 +242,4 @@ class PageController extends Controller
             ->get();
         return view('admin.mitra', compact('mitras'));
     }
-
 }

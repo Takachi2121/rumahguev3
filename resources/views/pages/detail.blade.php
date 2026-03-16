@@ -54,7 +54,14 @@
                 <span class="badge rounded-pill bg-success px-2 py-1 fs-7">{{ $jasa->keahlian }}</span>
                 <span class="badge rounded-pill bg-danger px-2 py-1 fs-7">{{ $jasa->lokasi }}</span>
             </span>
-            <p class="harga-detail text-danger mt-3">Rp {{ number_format($jasa->harga,0,',','.') }}</p>
+            <p class="harga-detail text-danger mt-3">
+                Rp {{ number_format($jasa->harga,0,',','.') }} /
+                @if ($jasa->keahlian == 'Tukang')
+                    Hari
+                @else
+                    m<sup>2</sup>
+                @endif
+            </p>
             <p class="mt-3">{{ $jasa->deskripsi }}</p>
             <a href="javascript:void(0);"
             class="btn btn-danger py-2 w-100 mt-3"
@@ -128,6 +135,7 @@
                                         Estimasi mulai dari <br>
                                         <strong class="text-danger">
                                             Rp {{ number_format($rj->harga,0,',','.') }}
+
                                         </strong>
                                     </p>
                                     <a href="{{ route('jasa-detail', $rj->id) }}" class="btn btn-outline-danger py-2 btn-sm w-100">
