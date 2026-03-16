@@ -40,9 +40,16 @@
                     <!-- Image -->
                     <div class="swiper jasa-img-swiper">
                         <div class="swiper-wrapper">
+                            <div class="swiper-wrapper">
+
+                            @php $hasPortfolio = false; @endphp
+
                             @for ($i = 1; $i <= 5; $i++)
                                 @php $field = $i == 1 ? 'portfolio' : 'portfolio'.$i; @endphp
-                                @if($item->$field)
+
+                                @if(!empty($item->$field))
+                                    @php $hasPortfolio = true; @endphp
+
                                     <div class="swiper-slide">
                                         <img src="{{ asset('assets/img/Portfolio/'.$item->user->nama.'/'.$item->$field) }}"
                                             class="card-img-top jasa-img"
@@ -50,6 +57,16 @@
                                     </div>
                                 @endif
                             @endfor
+
+                            @if(!$hasPortfolio)
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('assets/img/Vector/images.png') }}"
+                                        class="card-img-top jasa-img"
+                                        alt="Portfolio Default">
+                                </div>
+                            @endif
+
+                            </div>
                         </div>
                         <!-- Pastikan class ini -->
                         <div class="swiper-pagination"></div>
