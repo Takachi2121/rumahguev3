@@ -10,9 +10,15 @@
             <div class="col-md-4">
                 <p class="fw-semibold text-white mb-0 mt-lg-0 mt-md-0 mt-sm-5 mt-5">Company</p>
                 <ul class="list-unstyled mt-4">
-                    <li class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">Beranda</li>
-                    <li class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">Simulasi Rumah</li>
-                    <li class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">Berita</li>
+                    <li class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">
+                        <a href="{{ route('rumahgue') }}" class="text-decoration-none text-white-50">Beranda</a>
+                    </li>
+                    <a class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">
+                        <a href="{{ route('rumahgue') }}/#simulasi-rumah" class="text-decoration-none text-white-50">Simulasi Rumah</a>
+                    </li>
+                    <li class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">
+                        Berita
+                    </li>
                 </ul>
             </div>
             <div class="col-md-4 mt-4 mt-md-0">
