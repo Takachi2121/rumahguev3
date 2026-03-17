@@ -174,9 +174,9 @@
                 </div>
             </div>
         @else
-            <a href="{{ route('login') }}" class="btn-signin text-white text-decoration-none">
+            <button onclick="window.location.href = '{{ route('login') }}';" class="btn-signin text-white text-decoration-none">
                 Masuk
-            </a>
+            </button>
         @endif
 
     </nav>
