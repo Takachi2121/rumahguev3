@@ -39,6 +39,9 @@
                 </div>
             </div>
             @endforeach
+            <div class="d-flex justify-content-end align-items-center mt-4">
+                <span>{{ $berita->links('pagination::simple-bootstrap-4') }}</span>
+            </div>
         </div>
     </div>
 </div>
