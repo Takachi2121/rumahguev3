@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\kompasTVController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RABController;
@@ -27,6 +28,8 @@ Route::prefix('/')->group(function (){
     Route::get('/notifikasi', [MitraController::class, 'notifikasi'])->name('notifikasi');
     Route::post('/notif-read', [MitraController::class, 'notifRead'])->name('notifikasi-read');
     Route::post('/notif-create', [MitraController::class, 'notifCreate'])->name('notifikasi-create');
+
+    Route::get('/berita-gue', [kompasTVController::class, 'index'])->name('berita-gue');
 });
 Route::get('/pengaturan', [PageController::class, 'mitraSettings'])->name('mitra-settings');
 

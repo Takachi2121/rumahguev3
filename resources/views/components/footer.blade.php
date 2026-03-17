@@ -17,7 +17,7 @@
                         <a href="{{ route('rumahgue') }}/#simulasi-rumah" class="text-decoration-none text-white-50 fw-lighter" style="letter-spacing: 1px">Simulasi Rumah</a>
                     </li>
                     <li class="text-white-50 fw-lighter pt-2" style="letter-spacing: 1px">
-                        Berita
+                        <a href="{{ route('berita-gue') }}" class="text-decoration-none text-white-50">Berita</a>
                     </li>
                 </ul>
             </div>
