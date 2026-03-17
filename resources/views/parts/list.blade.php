@@ -33,7 +33,17 @@
 
         <div class="row g-4">
             @foreach ($jasa as $item)
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div class="
+            @if ($item->count() == 1)
+                col-xl-12 col-lg-12 col-md-12 col-12
+            @elseif ($item->count() == 2)
+                col-xl-6 col-lg-6 col-md-6 col-12
+            @elseif ($item->count() == 3)
+                col-xl-4 col-lg-4 col-md-6 col-12
+            @else
+                col-xl-3 col-lg-3 col-md-6 col-12
+            @endif
+            ">
 
                 <div class="card jasa-card border-0 shadow-sm">
 
