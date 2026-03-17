@@ -13,10 +13,10 @@
                     <li class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">
                         <a href="{{ route('rumahgue') }}" class="text-decoration-none text-white-50">Beranda</a>
                     </li>
-                    <a class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">
-                        <a href="{{ route('rumahgue') }}/#simulasi-rumah" class="text-decoration-none text-white-50">Simulasi Rumah</a>
+                    <a class="text-white-50 fw-lighter" style="letter-spacing: 1px">
+                        <a href="{{ route('rumahgue') }}/#simulasi-rumah" class="text-decoration-none text-white-50 fw-lighter" style="letter-spacing: 1px">Simulasi Rumah</a>
                     </li>
-                    <li class="text-white-50 fw-lighter pb-2" style="letter-spacing: 1px">
+                    <li class="text-white-50 fw-lighter pt-2" style="letter-spacing: 1px">
                         Berita
                     </li>
                 </ul>
