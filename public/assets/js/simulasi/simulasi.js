@@ -248,7 +248,7 @@ function getRecommend() {
             window.location.href = "/hasil";
         })
         .catch((err) => {
-            console.log(err.response?.data);
+            // console.log(err.response?.data);
 
             btn.disabled = false;
             btnText.classList.remove("d-none");

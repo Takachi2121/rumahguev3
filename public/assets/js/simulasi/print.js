@@ -168,7 +168,7 @@ function sendRAB() {
                         showProgressBar: true,
                     });
 
-                    console.log(error.response);
+                    // console.log(error.response);
                 });
         });
     }
