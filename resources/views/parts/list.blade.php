@@ -40,7 +40,6 @@
                     <!-- Image -->
                     <div class="swiper jasa-img-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-wrapper">
 
                             @php $hasPortfolio = false; @endphp
 
@@ -66,7 +65,6 @@
                                 </div>
                             @endif
 
-                            </div>
                         </div>
                         <!-- Pastikan class ini -->
                         <div class="swiper-pagination"></div>
