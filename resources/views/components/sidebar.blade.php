@@ -7,7 +7,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="nav flex-column gap-2 flex-grow-1">
+    <nav class="nav flex-column gap-2 grow">
         <p class="text-uppercase text-black-50 small fw-bold mt-3 mb-1">Menu Utama</p>
 
         @if (Auth::user()->is_mitra == 1)
@@ -16,6 +16,9 @@
         @elseif(Auth::user()->is_mitra == 2)
             <a class="nav-link" href="{{ route('admin-user') }}"><i class="fa-solid fa-pencil me-2"></i> Data User</a>
             <a class="nav-link" href="{{ route('admin-mitra') }}"><i class="fa-solid fa-briefcase me-2"></i> Data Mitra</a>
+
+            <p class="text-uppercase text-black-50 small fw-bold mt-3 mb-1">Data Simulasi</p>
+            <a class="nav-link" href="{{ route('admin-material') }}"><i class="fa-solid fa-house-circle-check me-2"></i> Data Material</a>
         @endif
 
         <p class="text-uppercase text-black-50 small fw-bold mt-3 mb-1">Pengaturan</p>
@@ -32,7 +35,7 @@
 </aside>
 
 <!-- Main Content -->
-<main class="flex-grow-1 p-4" style="overflow-y: auto">
+<main class="grow p-4" style="overflow-y: auto">
     <!-- Header Page -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <!-- Title & Subtitle -->

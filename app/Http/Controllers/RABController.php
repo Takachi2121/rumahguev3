@@ -783,7 +783,7 @@ class RABController
             $daun_pintu_wc = RABMaterial::Material(['kategori' => 'pintu_jendela', 'item' => 'daun_pintu']);
             $res['lantai1']['PEKERJAAN PINTU JENDELA'][] = [
                 'daun_pintu_wc',
-                $recomend['ruang_1'][6]['jml'], //ceil($daun_pintu_wc->rasio * $luas),
+                $recomend['ruang_1'][6]['jml'],
                 'bh',
                 $daun_pintu_wc->harga,
                 false,

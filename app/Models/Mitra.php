@@ -10,6 +10,7 @@ class Mitra extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'mitra';
+    protected $with = ['user'];
 
     protected $fillable = [
         'user_id',

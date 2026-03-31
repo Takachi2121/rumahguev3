@@ -56,5 +56,5 @@ class User extends Authenticatable
         return $this->hasOne(Mitra::class);
     }
 
-    
+
 }

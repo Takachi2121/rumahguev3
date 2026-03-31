@@ -28,8 +28,13 @@
 
                         <p class="card-title mb-2 fs-5 fw-semibold">{{ $item['title'] }}</p>
 
-                        <p class="fw-normal text-black-50 mb-3">
-                            {{ \Carbon\Carbon::createFromLocaleFormat('d F Y', 'id', $item['date'])->diffForHumans() }}
+                        <p class="fw-normal text-black-50 mb-3 d-flex justify-content-between">
+                            <span>
+                                {{ \Carbon\Carbon::createFromLocaleFormat('d F Y', 'id', $item['date'])->diffForHumans() }}
+                            </span>
+                            <span>
+                                dari Kompas.com
+                            </span>
                         </p>
 
                         <div class="mt-auto">

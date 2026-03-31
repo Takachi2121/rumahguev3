@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\kompasTVController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RABController;
@@ -53,6 +54,9 @@ Route::prefix('admin')->group(function(){
     Route::post('/tambah-mitra', [AdminController::class, 'tambahMitra'])->name('admin-tambah-mitra');
     Route::put('/edit-mitra/{id}', [AdminController::class, 'editMitra'])->name('admin-edit-mitra');
     Route::delete('/hapus-mitra/{id}', [AdminController::class, 'hapusMitra'])->name('admin-hapus-mitra');
+
+    Route::get('/material', [MaterialController::class, 'index'])->name('admin-material');
+    Route::put('/update-material/{id}', [MaterialController::class, 'update'])->name('admin-update-material');
 });
 
 Route::prefix('login')->group(function (){
