@@ -40,7 +40,7 @@ class AuthController extends Controller
     public function requestOTP(Request $request){
         $request->validate([
             'namaUser' => 'required',
-            'emailUser' => 'required|email|unique:users,email',
+            'emailUser' => 'required|email:dns|unique:users,email',
             'passUser' => 'required',
             'passUserRepeat' => 'required|same:passUser',
             'is_mitra' => 'nullable|integer|min:0|max:1',
@@ -53,6 +53,7 @@ class AuthController extends Controller
             'emailUser.required' => 'Email Tidak Boleh Kosong',
             'passUser.required' => 'Password Tidak Boleh Kosong',
             'emailUser.unique' => 'Email Sudah Terdaftar',
+            'emailUser.email' => 'Format Email Tidak Valid',
         ]);
 
         $otp = rand(100000, 999999);
