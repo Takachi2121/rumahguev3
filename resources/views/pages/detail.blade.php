@@ -51,11 +51,14 @@
         <div class="col-lg-6 col-md-12 col-sm-12 mt-lg-0 mt-md-4 mt-sm-4" id="detail-right">
             <h3 class="fw-normal fs-3">{{ $jasa->user->nama ?? 'Nama Tidak Ada' }}</h3>
             <span>
-                <span class="badge rounded-pill bg-success px-2 py-1 fs-7">{{ $jasa->keahlian }}</span>
-                <span class="badge rounded-pill bg-danger px-2 py-1 fs-7">{{ $jasa->lokasi }}</span>
+                <span class="badge rounded-pill bg-success px-2 py-1 fs-7 fw-normal">{{ $jasa->keahlian }}</span>
+                <span class="badge rounded-pill bg-danger px-2 py-1 fs-7 fw-normal">{{ $jasa->lokasi }}</span>
+                @if ($jasa->promos->isNotEmpty())
+                    <span class="badge rounded-pill bg-primary px-2 py-1 fs-7 fw-normal">Diskon {{ $jasa->promos->first()->diskon }}%</span>
+                @endif
             </span>
             <p class="harga-detail text-danger mt-3">
-                Rp {{ number_format($jasa->harga,0,',','.') }} /
+                Rp {{ number_format($jasa->promos->isNotEmpty() ? $jasa->promos->first()->harga_akhir : $jasa->harga,0,',','.') }} /
                 @if ($jasa->keahlian == 'Tukang')
                     Hari
                 @else

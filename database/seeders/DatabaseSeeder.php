@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Mitra;
 use App\Models\MitraNotification;
+use App\Models\Promo;
 use App\Models\User;
 use Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,7 +21,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(MaterialSeeder::class);
         $this->call(RecommendSeeder::class);
-        Mitra::factory(10)->create();
+        Promo::factory()->recycle(Mitra::factory()->count(10)->create())->count(5)->create();
+
         User::create([
             'nama' => 'Admin Rumahgue',
             'email' => 'rumahgue@gmail.com',

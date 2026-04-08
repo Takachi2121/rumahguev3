@@ -7,6 +7,7 @@ use App\Http\Controllers\kompasTVController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\RABController;
 use App\Http\Controllers\RecommendController;
 use App\Http\Controllers\SocialController;
@@ -43,9 +44,11 @@ Route::prefix('mitra')->group(function(){
     Route::post('/add-portofolio', [MitraController::class, 'add'])->name('mitra-add-portfolio');
     Route::put('/edit-portofolio', [MitraController::class, 'edit'])->name('mitra-edit-portfolio');
     Route::delete('/delete-portofolio', [MitraController::class, 'delete'])->name('mitra-delete-portfolio');
+
+    Route::resource('/promo', PromoController::class);
 });
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::get('/', [PageController::class, 'adminUser'])->name('admin-user');
     Route::put('/edit-user/{id}', [AdminController::class, 'editUser'])->name('admin-edit-user');
     Route::delete('/hapus-user/{id}', [AdminController::class, 'hapusUser'])->name('admin-hapus-user');

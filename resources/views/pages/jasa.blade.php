@@ -50,9 +50,12 @@
     <div class="row" id="jasaList">
 
         @forelse ($jasa as $data)
+            @php
+                $hargaPromo = $data->promos->firstWhere('mitra_id', $data->id)?->harga_akhir;
+            @endphp
             <div
                 class="col-lg-3 col-md-6 col-sm-12 mb-4 jasa-card"
-                data-price="{{ $data->harga }}"
+                data-price="{{ $hargaPromo ?? $data->harga }}"
                 data-lokasi="{{ $data->lokasi }}"
             >
                 <div class="card h-100 shadow-sm position-relative d-flex flex-column">
@@ -77,14 +80,21 @@
                         <div class="mt-auto">
                             <p class="mb-2">
                                 Estimasi mulai dari <br>
-                                <strong class="text-danger">
-                                    Rp {{ number_format($data->harga,0,',','.') }} /
-                                    @if (Request()->query('kategori') == 'Tukang')
+                                <div class="d-flex justify-content-between">
+                                    <strong class="text-danger">
+                                        Rp {{ number_format($hargaPromo ?? $data->harga,0,',','.') }} /
+                                        @if (Request()->query('kategori') == 'Tukang')
                                         Hari
-                                    @else
+                                        @else
                                         m<sup>2</sup>
+                                        @endif
+                                    </strong>
+                                    @if ($data->promos->firstWhere('mitra_id', $data->id)?->diskon > 0)
+                                    <span class="badge bg-danger align-self-center">
+                                        {{ $data->promos->firstWhere('mitra_id', $data->id)?->diskon }}%
+                                    </span>
                                     @endif
-                                </strong>
+                                </div>
                             </p>
                             <a href="{{ route('jasa-detail', $data->id) }}" class="btn btn-outline-danger py-2 btn-sm w-100">
                                 Lihat Detail&nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i>

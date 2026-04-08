@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale('id');
         Paginator::useBootstrapFive();
+        Authenticate::redirectUsing(function(){
+            session()->flash('auth_error', 'Silahkan Login Untuk Melanjutkan');
+            return route('rumahgue');
+        });
     }
 }

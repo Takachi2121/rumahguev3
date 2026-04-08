@@ -10,7 +10,7 @@ class Mitra extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'mitra';
-    protected $with = ['user'];
+    protected $with = ['user', 'promos'];
 
     protected $fillable = [
         'user_id',
@@ -36,5 +36,10 @@ class Mitra extends Model
     public function mitraNotification()
     {
         return $this->hasMany(MitraNotification::class, 'mitra_id', 'user_id');
+    }
+
+    public function promos()
+    {
+        return $this->hasMany(Promo::class, 'mitra_id', 'id');
     }
 }

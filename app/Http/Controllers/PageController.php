@@ -34,7 +34,9 @@ class PageController extends Controller
         }
 
         $kategori = $request->query('kategori');
+        $promo = $request->query('promo');
 
+        // Title
         if($kategori == 'Interior'){
             $title = 'Jasa Interior';
             $subtitle = 'Temukan Mitra Terbaik untuk Desain Interior Impian Anda';
@@ -49,14 +51,36 @@ class PageController extends Controller
             $subtitle = 'Temukan Mitra Terbaik untuk Bangunan Impian Anda';
         }
 
-        if($kategori){
-            $jasa = Mitra::with('user:id,nama')
-            ->where('keahlian', 'LIKE', "%$kategori%")
-            ->get(['id', 'user_id', 'harga', 'foto_profil', 'keahlian', 'lokasi']);
-        }else{
-            $jasa = Mitra::all();
+        // Base query
+        $query = Mitra::with([
+            'user:id,nama',
+            'promos:id,mitra_id,harga_akhir,diskon'
+        ]);
+
+        if ($promo) {
+            // Ambil HANYA mitra yang punya promo
+            $query->whereHas('promos');
+
+            // Optional: filter berdasarkan kategori promo
+            if ($promo == 'TukangPromo') {
+                $query->where('keahlian', 'LIKE', '%Tukang%');
+            } elseif ($promo == 'InteriorPromo') {
+                $query->where('keahlian', 'LIKE', '%Interior%');
+            } elseif ($promo == 'ArsitekPromo') {
+                $query->where('keahlian', 'LIKE', '%Arsitek%');
+            }
+        } else {
+            if ($kategori) {
+                $query->where('keahlian', 'LIKE', "%$kategori%");
+            }
         }
-        $lokasi = Mitra::select('lokasi')->distinct()->get();
+
+        // Ambil data jasa
+        $jasa = $query->get(['id', 'user_id', 'harga', 'foto_profil', 'keahlian', 'lokasi']);
+
+        // Ambil lokasi berdasarkan hasil filter
+        $lokasi = (clone $query)->select('lokasi')->distinct()->get();
+
         return view('pages.jasa', compact('jasa', 'lokasi', 'title', 'subtitle'));
     }
 
