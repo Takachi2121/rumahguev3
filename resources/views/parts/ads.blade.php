@@ -12,23 +12,26 @@
             @endphp
             @foreach ($data as $item)
             <div class="swiper-slide">
-                <div class="row slide-content" style="background-color: red;">
-                    <div class="col-md-6 col ms-5 mt-5 mb-5 align-self-center">
-                        <h1 class="text-white fw-bolder">Cek Promo <br>{{ $item['title'] }}</h1>
-                        <p class="text-white fw-light">
-                            {{ $item['jasa'] }}
-                        </p>
-                        <p class="fw-light text-white w-75">
-                            {{ $item['caption'] }}
-                        </p>
-                        <br>
+                <div class="row slide-content align-items-center" style="background-color: red; min-height: 399.98px;">
+
+                    <!-- TEXT -->
+                    <div class="col-lg-6 text-white ps-5 py-5">
+                        <h1 class="fw-bolder">Cek Promo <br>{{ $item['title'] }}</h1>
+                        <p class="fw-light">{{ $item['jasa'] }}</p>
+                        <p class="fw-light w-75">{{ $item['caption'] }}</p>
+
                         <a href="{{ route('jasa', ['promo' => $item['promo']]) }}" class="text-decoration-none">
                             Cek Promo
                         </a>
                     </div>
-                    <div class="col-md-6 d-lg-inline  w-25 align-self-end">
-                        <img src="{{ $item['path'] }}" height="440px" alt="Ads 1" class="d-lg-block d-md-block d-sm-none d-none">
+
+                    <!-- IMAGE -->
+                    <div class="col-lg-6 d-none d-lg-flex pe-5 justify-content-end">
+                        <img src="{{ $item['path'] }}"
+                            class="img-fluid"
+                            style="max-height: 400px;">
                     </div>
+
                 </div>
             </div>
             @endforeach
