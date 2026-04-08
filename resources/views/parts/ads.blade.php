@@ -5,9 +5,9 @@
         <div class="swiper-wrapper">
             @php
                 $data = [
-                    ['path' => asset('assets/img/LandingPage/ads/Kontruksi.png'), 'jasa' => 'Jasa Tukang', 'caption' => 'Lihat apakah saat ini sedang ada penawaran menarik untuk jasa tukang dan wujudkan rumah impian Anda dengan biaya lebih terjangkau.', 'promo' => 'TukangPromo', 'title' => 'Pembangunan Rumah'],
-                    ['path' => asset('assets/img/LandingPage/ads/Interior.png'), 'jasa' => 'Jasa Interior', 'caption' => 'Temukan desain interior yang sesuai dengan gaya hidup Anda dan wujudkan ruang yang nyaman.', 'promo' => 'InteriorPromo', 'title' => 'Desain Interior'],
-                    ['path' => asset('assets/img/LandingPage/ads/Arsitek.png'), 'jasa' => 'Jasa Arsitek', 'caption' => 'Dapatkan layanan arsitektur profesional untuk merancang rumah impian Anda dengan fungsi dan estetika yang optimal.', 'promo' => 'ArsitekPromo', 'title' => 'Jasa Arsitek'],
+                    ['path' => asset('assets/img/LandingPage/Ads/Kontruksi.png'), 'jasa' => 'Jasa Tukang', 'caption' => 'Lihat apakah saat ini sedang ada penawaran menarik untuk jasa tukang dan wujudkan rumah impian Anda dengan biaya lebih terjangkau.', 'promo' => 'TukangPromo', 'title' => 'Pembangunan Rumah'],
+                    ['path' => asset('assets/img/LandingPage/Ads/Interior.png'), 'jasa' => 'Jasa Interior', 'caption' => 'Temukan desain interior yang sesuai dengan gaya hidup Anda dan wujudkan ruang yang nyaman.', 'promo' => 'InteriorPromo', 'title' => 'Desain Interior'],
+                    ['path' => asset('assets/img/LandingPage/Ads/Arsitek.png'), 'jasa' => 'Jasa Arsitek', 'caption' => 'Dapatkan layanan arsitektur profesional untuk merancang rumah impian Anda dengan fungsi dan estetika yang optimal.', 'promo' => 'ArsitekPromo', 'title' => 'Jasa Arsitek'],
                 ]
             @endphp
             @foreach ($data as $item)
