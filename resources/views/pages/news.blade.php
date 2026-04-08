@@ -15,7 +15,7 @@
 
         <div class="row">
             @foreach ($berita as $item)
-            <div class="col-lg-4 mb-4 col-md-4 col-sm-12" data-aos="fade-up" data-aos-duration="500" data-aos-once="true" data-aos-delay="{{ $loop->iteration * 200 }}" data-aos-offset="0">
+            <div class="col-lg-4 mb-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="500" data-aos-once="true" data-aos-delay="{{ $loop->iteration * 200 }}" data-aos-offset="0">
                 <div class="card h-100 d-flex flex-column">
 
                 @if($item['image'])
