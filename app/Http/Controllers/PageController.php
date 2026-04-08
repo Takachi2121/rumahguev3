@@ -36,19 +36,34 @@ class PageController extends Controller
         $kategori = $request->query('kategori');
         $promo = $request->query('promo');
 
-        // Title
-        if($kategori == 'Interior'){
-            $title = 'Jasa Interior';
-            $subtitle = 'Temukan Mitra Terbaik untuk Desain Interior Impian Anda';
-        }elseif($kategori == 'Arsitek'){
-            $title = 'Jasa Arsitek';
-            $subtitle = 'Wujudkan Bangunan Impian Anda dengan Bantuan Arsitek Profesional';
-        }elseif($kategori == 'Tukang'){
-            $title = 'Jasa Tukang';
-            $subtitle = 'Mitra Tukang Terpercaya untuk Semua Kebutuhan Perbaikan Rumah Anda';
-        }else{
-            $title = 'Rekomendasi Gue';
-            $subtitle = 'Temukan Mitra Terbaik untuk Bangunan Impian Anda';
+        if ($promo) {
+            if ($promo == 'TukangPromo') {
+                $title = 'Promo Jasa Tukang';
+                $subtitle = 'Dapatkan penawaran terbaik untuk jasa tukang pilihan dengan harga lebih hemat';
+            } elseif ($promo == 'InteriorPromo') {
+                $title = 'Promo Jasa Interior';
+                $subtitle = 'Wujudkan desain interior impian Anda dengan penawaran spesial';
+            } elseif ($promo == 'ArsitekPromo') {
+                $title = 'Promo Jasa Arsitek';
+                $subtitle = 'Gunakan layanan arsitek profesional dengan promo menarik';
+            } else {
+                $title = 'Promo Spesial';
+                $subtitle = 'Temukan berbagai penawaran menarik dari mitra terbaik kami';
+            }
+        } else {
+            if ($kategori == 'Interior') {
+                $title = 'Jasa Interior';
+                $subtitle = 'Temukan Mitra Terbaik untuk Desain Interior Impian Anda';
+            } elseif ($kategori == 'Arsitek') {
+                $title = 'Jasa Arsitek';
+                $subtitle = 'Wujudkan Bangunan Impian Anda dengan Bantuan Arsitek Profesional';
+            } elseif ($kategori == 'Tukang') {
+                $title = 'Jasa Tukang';
+                $subtitle = 'Mitra Tukang Terpercaya untuk Semua Kebutuhan Perbaikan Rumah Anda';
+            } else {
+                $title = 'Rekomendasi Gue';
+                $subtitle = 'Temukan Mitra Terbaik untuk Bangunan Impian Anda';
+            }
         }
 
         // Base query
