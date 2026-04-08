@@ -74,7 +74,7 @@ body {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-glass a {
+.navbar-glass .item-nav {
     color: #000;
     margin: 0 25px;
     font-family: "Poppins", sans-serif;
@@ -83,7 +83,7 @@ body {
     transition: font-weight 0.3s ease-in-out;
 }
 
-.navbar-glass a::after {
+.navbar-glass .item-nav::after {
     content: "";
     position: absolute;
     left: 0;
@@ -94,11 +94,11 @@ body {
     transition: width 0.3s ease;
 }
 
-.navbar-glass a:hover::after {
+.navbar-glass .item-nav:hover::after {
     width: 100%;
 }
 
-.navbar-glass:nth-child(1) a {
+.dropdown-item .navbar-glass:nth-child(1) a {
     margin-left: 0;
 }
 
