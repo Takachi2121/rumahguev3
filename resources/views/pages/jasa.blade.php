@@ -105,7 +105,13 @@
             </div>
         @empty
             <div class="col-12">
-                <p class="text-center">Tidak ada jasa tersedia.</p>
+                <p class="text-center">
+                    @if (Request()->query('promo'))
+                        Tidak ada promo tersedia.
+                    @else
+                        Tidak ada jasa tersedia.
+                    @endif
+                </p>
             </div>
         @endforelse
 
