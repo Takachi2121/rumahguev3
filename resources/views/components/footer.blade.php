@@ -53,3 +53,9 @@
         </div>
     </div>
 </footer>
+
+<div class="bg-black py-4 text-center">
+    <p class="text-white mb-0 small">
+        &copy; {{ date('Y') }} Andre Production. All rights reserved.
+    </p>
+</div>

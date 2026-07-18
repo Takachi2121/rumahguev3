@@ -19,7 +19,7 @@ class MitraFactory extends Factory
         return [
             'user_id' => \App\Models\User::factory(),
             'deskripsi' => $this->faker->paragraph(),
-            'foto_profil' => 'Ray.jpg',
+            'foto_profil' => 'default.jpg',
             'lokasi' => $this->faker->randomElement(['Jakarta', 'Bandung', 'Surabaya', 'Yogyakarta', 'Semarang']),
             'portfolio' => 'Portfolio1.jpg',
             'portfolio2' => 'Portfolio2.jpg',

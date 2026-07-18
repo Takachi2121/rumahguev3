@@ -62,7 +62,8 @@
                                     <div class="swiper-slide">
                                         <img src="{{ asset('assets/img/Portfolio/'.$item->user->nama.'/'.$item->$field) }}"
                                             class="card-img-top jasa-img"
-                                            alt="Portfolio {{ $i }}">
+                                            alt="Portfolio {{ $i }}"
+                                            onerror="this.onerror=null;this.src='{{ asset('assets/img/Project/Default/Portfolio'.$i.'.jpg') }}';">
                                     </div>
                                 @endif
                             @endfor

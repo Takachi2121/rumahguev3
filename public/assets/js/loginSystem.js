@@ -64,6 +64,8 @@ function registerUser(){
                 message = Object.values(errors)[0][0];
             }
 
+            console.log(err.response);
+
             Swal.fire({
                 icon: 'error',
                 title: 'Pendaftaran Gagal',
