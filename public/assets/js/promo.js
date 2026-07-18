@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         showConfirmButton: false,
                     });
 
-                    console.log(response.data.message);
+                    // console.log(response.data.message);
 
                     modal.hide();
                     setTimeout(() => location.reload(), 1500);

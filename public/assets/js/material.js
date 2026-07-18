@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: "Gagal",
                     text: error.response?.data?.message ?? "Terjadi kesalahan",
                 });
-                console.log(error.response);
+                // console.log(error.response);
 
                 // reset tombol
                 btn.querySelector(".btn-text").classList.remove("d-none");
